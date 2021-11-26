@@ -1,0 +1,97 @@
+baseURL = "https://example.com"
+languageCode = "en"
+defaultContentLanguage = "en"
+title = "Kenny Nguyen (momo)"
+theme = "KeepIt"
+
+paginate = 12
+enableEmoji = true
+enableRobotsTXT = true
+googleAnalytics = ""
+
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[blackfriday]
+  hrefTargetBlank = true
+  nofollowLinks = true
+  noreferrerLinks = true
+
+[Permalinks]
+ posts = "/:year/:filename/"
+
+[menu]
+  [[menu.main]]
+    name = "Blog"
+    url = "/posts/"
+    weight = 1
+
+
+
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 4
+
+[params]
+    author = "Momo"
+    subtitle = "Penetration Tester | OSCP, CRTO, eCPTXv2"       # Subtitle
+    cdn_url = ""           # Base CDN URL
+    home_mode = "/posts/" # post or other
+    dateFormatToUse = "" # set date format, default "2 January 2006"
+    avatar = "/images/jin.png.jpg"
+    
+    
+
+    
+    socialShare = true
+
+    description = "x" # site description
+    keywords = "x" # site keywords
+
+
+[params.gravatar]
+    #email = "example@gmail.com"   #uncomment and insert your email address to use gravatar
+
+
+[params.social]
+    GitHub = "momo1239"
+    Linkedin = "kenny-nguyen-2a3022152"
+   
+
+[params.share]
+
+Linkedin = true
+
+
+
+
+[params.gitalk]
+owner = ""       # Your GitHub ID
+repo = ""        # The repo to store comments
+clientId = ""    # Your client ID
+clientSecret = "" # Your client secret
+
+[params.valine]
+  enable = false
+  language = 'en'
+  appId = 'your appId'
+  appKey = 'your appKey'
+  notify = false  # mail notifier , https://github.com/xCss/Valine/wiki
+  verify = false # Verification code
+  avatar = 'mm'
+  placeholder = 'your comments ...'
+  visitor = true
+
+[params.utterances]       # https://utteranc.es/
+    owner = ""              # Your GitHub ID
+    repo = ""               # The repo to store comments
+
+[params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
+    owner = ""              # Your GitHub ID
+    repo = ""               # The repo to store comments
+    clientId = ""           # Your client ID
+    clientSecret = ""       # Your client secret
