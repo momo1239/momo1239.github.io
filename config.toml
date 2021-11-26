@@ -2,7 +2,7 @@ baseURL = "https://example.com"
 languageCode = "en"
 defaultContentLanguage = "en"
 title = "Kenny Nguyen (momo)"
-publishDir = "docs"
+publishDir = "myblog"
 theme = "KeepIt"
 
 paginate = 12
