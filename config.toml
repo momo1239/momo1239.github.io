@@ -1,4 +1,4 @@
-baseURL = "https://example.com"
+baseURL = "https://momo1239.github.io"
 languageCode = "en"
 defaultContentLanguage = "en"
 title = "Kenny Nguyen (momo)"
@@ -41,7 +41,7 @@ googleAnalytics = ""
     author = "Momo"
     subtitle = "Penetration Tester | OSCP, CRTO, eCPTXv2"       # Subtitle
     cdn_url = ""           # Base CDN URL
-    home_mode = "/posts/" # post or other
+    home_mode = "" # post or other
     dateFormatToUse = "" # set date format, default "2 January 2006"
     avatar = "/images/jin.png.jpg"
     
@@ -50,7 +50,7 @@ googleAnalytics = ""
     
     socialShare = true
 
-    description = "x" # site description
+    description = "Momo Blog" # site description
     keywords = "x" # site keywords
 
 

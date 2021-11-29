@@ -2,17 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Kenny Nguyen (momo)</title>
-    <link>https://example.com/posts/</link>
+    <link>https://momo1239.github.io/posts/</link>
     <description>Recent content in Posts on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://momo1239.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simple Shellcode Runner in Python3</title>
+      <link>https://momo1239.github.io/2021/python-shellcode-runner/</link>
+      <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://momo1239.github.io/2021/python-shellcode-runner/</guid>
+      <description>Introduction I&amp;rsquo;m going to be discussing executing shellcode in Python. A shellcode runner is a tool that executes shellcode in memory. This technique enables us to avoid downloading malware to the hard drive, which might be flagged by AV software.
+We can use the native windows operating system API to execute shellcode in memory. This is also known as Win32 API. These APIs were designed to be used with C and uses C data types, however, they can be invoked in other languages.</description>
+    </item>
+    
     <item>
       <title>Certified Red Team Operator (CRTO) Review</title>
-      <link>https://example.com/2021/crto-review/</link>
+      <link>https://momo1239.github.io/2021/crto-review/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/2021/crto-review/</guid>
+      <guid>https://momo1239.github.io/2021/crto-review/</guid>
       <description>What is CRTO? CRTO is supposed to be an introductory course into red teaming tradecraft, from initial compromise all the way to domain takeover and data exfiltration. From their website:
  &amp;ldquo;Red Team Ops is an online course that teaches the basic principals, tools and techniques, that are synonymous with red teaming.
 Students will first cover the core concepts of adversary simulation, command &amp;amp; control, and how to plan for an engagement.</description>
