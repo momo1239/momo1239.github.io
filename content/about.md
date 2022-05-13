@@ -14,14 +14,11 @@ aliases = ["about-us","about-hugo","contact"]
 
 # whoami
 
-My name is Kenny Nguyen, I'm 21, and I am a cybersecurity professional with experience in offensive security and VAPT. I graduated with a master's degree in cybersecurity during 2021 at WGU. Then I got my OSCP a few months after that and got my current position at a consulting firm. I am passionate and interested in offensive security research including:
-- Network Security
-- Web Application Security
-- Industrial Control System Security
-- Exploit Development
-- Malware Analysis and Reverse Engineering
-
-I am creating this technical research blog to share my journey as I explore security topics, vulnerabilities, techniques, and etc.
+Lenard. Offensive security research.
+- Adverserial Emulation / Red Teaming
+- Malware Dev
+- Vulnerability Research
+- Cryptography
 
 -[Linkedin](https://www.linkedin.com/in/kenny-nguyen-2a3022152/)
 
@@ -30,7 +27,7 @@ I am creating this technical research blog to share my journey as I explore secu
 # Certifications
 - Masters of Science in Cybersecurity
 - Offensive Security Certified Professional (OSCP)
-- eLearnSecurity Certified Penetration Tester eXtreme v2
+- eLearnSecurity Certified Penetration Tester eXtreme v2 (eCPTXv2)
 - Certified Red Team Operator (CRTO)
 - Certified Ethical Hacker (CEH)
 - CompTIA Security+

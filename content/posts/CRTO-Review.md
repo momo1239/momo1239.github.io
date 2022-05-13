@@ -1,6 +1,7 @@
 ---
 title: "Certified Red Team Operator (CRTO) Review"
 date: 2021-11-17
+tags: ["certification", "red teaming", "review"]
 draft: false
 ---
 

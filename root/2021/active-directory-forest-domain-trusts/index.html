@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://momo1239.github.io/2021/python-shellcode-runner/" />
+  <link rel="next" href="https://momo1239.github.io/2021/dll/" />
+  <link rel="canonical" href="https://momo1239.github.io/2021/active-directory-forest-domain-trusts/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Active Directory - Forest &amp; Domain Trusts | Kenny Nguyen (momo)
+       
+  </title>
+  <meta name="title" content="Active Directory - Forest &amp; Domain Trusts | Kenny Nguyen (momo)">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Active Directory - Forest &amp; Domain Trusts"/>
+<meta name="twitter:description" content="Introduction After taking both the CRTO and eCPTXv2 course, I wanted to reorganize my notes and discuss all the different ways to abuse an active directory trust. This is not a comprehensive list or guide by any means.
+What is a domain trust? An active directory trust relationship allows users in one domain to access resources in another domain. This is done through a system of referrals. When a user requests for access to a resource that is outside of their domain, their KDC will return a referral ticket pointing to the KDC in the external domain."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Active Directory - Forest \u0026 Domain Trusts",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/momo1239.github.io\/2021\/active-directory-forest-domain-trusts\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "red teaming",
+  "wordcount":  1667 ,
+  "url": "https:\/\/momo1239.github.io\/2021\/active-directory-forest-domain-trusts\/",
+  "datePublished": "2021-12-12T00:00:00\u002b00:00",
+  "dateModified": "2021-12-12T00:00:00\u002b00:00",
+  
+  
+  
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://momo1239.github.io">Kenny Nguyen (momo)</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://momo1239.github.io">Kenny Nguyen (momo)</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Active Directory - Forest &amp; Domain Trusts</h1>
+        <div class="post-meta">
+            Written by <a href="https://momo1239.github.io" rel="author">Momo</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2021-12-12 >12 December 2021</time>
+                </span>
+                in
+                
+                <i class="iconfont icon-timer"></i>
+                8 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="introduction">Introduction</h1>
+<p>After taking both the CRTO and eCPTXv2 course, I wanted to reorganize my notes and discuss all the different ways to abuse an active directory trust. This is not a comprehensive list or guide by any means.</p>
+<h1 id="what-is-a-domain-trust">What is a domain trust?</h1>
+<p>An active directory trust relationship allows users in one domain to access resources in another domain. This is done through a system of referrals. When a user requests for access to a resource that is outside of their domain, their KDC will return a referral ticket pointing to the KDC in the external domain.</p>
+<p>The TGT of the user is included in the TGS-REP of the referral ticket but it is encrypted with the inter-realm key instead of the krbtgt account. The external domain will decrypt the inter-realm TGT with the inter-realm key and returns a TGS-REP back to the user and the user can then proceed to present the TGS to a service.</p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/trusts.png" alt="kerberos authentication between cross-domain/forest" class="lazyload"><figcaption class="image-caption">kerberos authentication between cross-domain/forest</figcaption></figure></p>
+<h2 id="terminology-brief">Terminology Brief</h2>
+<ul>
+<li>Forest: A forest is a collection of domains that can be part of one or more domain trees.</li>
+<li>SID: A security identifier uniquely identifies a security principal (user, domain, group)</li>
+<li>One way trust: A one way trust allows principals in the <strong>trusted</strong> domain to access resources in the <strong>trusting</strong> domain, but not the other way around.</li>
+<li>Two way trust: A two way trust is just two one-way trusts that go in both direction.</li>
+<li>Transitive trust: A transitive trust is a trust that is extended to not only the child object, but also to each object the child object trusts. This means that a trusting domain will also trust the domains that the trusted domain trusts.</li>
+</ul>
+<h1 id="trust-types">Trust Types</h1>
+<p>Trusts can have different characteristics. By default, two-way transitive trusts are created when a new domain is added to a domain tree or a forest root domain. These two default trust types are parent-child trusts and tree-root trusts.</p>
+<ul>
+<li>
+<p>Parent-child trusts: are part of the same forest. This trust is automatically created when a new domain is created in a tree.</p>
+</li>
+<li>
+<p>Tree-root trusts: A trust between root domain in a forest and a new tree root.</p>
+</li>
+<li>
+<p>External Trusts: Trusts between domains in different forests. It is nontransitive and enforces SID filtering.</p>
+</li>
+<li>
+<p>Forest Trusts: A trust relationship between a root domain in different forests. It also enforces SID filtering.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>Microsoft extinguishes between inter-forest trusts and intra-forest trusts. Intra-forest trusts are trust relationships within the same forest, while inter-forest trusts are trusts between two different forests.</strong></p>
+</blockquote>
+<h1 id="sid-history-abuse">SID History Abuse</h1>
+<p>An intra-forest trust such as a parent-child or tree-root trust can be abused via an attack called SID History Abuse from the research of Sean Metcalf. Within a single forest, all domains trust each other and we can escalate from one domain to all the others.</p>
+<h2 id="what-is-sid-history">What is SID History?</h2>
+<p>SID History was designed to support migration of users from one domain to another. To preserve access to resources in the user&rsquo;s old domain, the user&rsquo;s previous SID would be added to the SID History of their new account. This works because the SIDs are not being filtered out in the cross-domain referrals via SID filtering.</p>
+<p>This means that if we add the SID of an enterprise admin to the sid history, we can access resources as if we were an enterprise admin. Mimikatz has a functionality to include extra account SIDs from other domains when making a golden ticket.</p>
+<p>If you have compromised the domain controller of a child domain, you can add <code>S-1-5-21-&lt;RootDomain&gt;-519</code> to the /sids flag and compromise the parent domain. This can allow an attacker to completely compromise the <strong>entire</strong> forest as long as they can compromise <strong>one</strong> domain in the forest.</p>
+<h2 id="demo">Demo</h2>
+<p>The process will be the same as creating a golden ticket with the additional sid.</p>
+<pre tabindex="0"><code>kerberos::golden /user:Administrator /domain:&lt;currentdomain&gt; /sid:&lt;CurrentDomainSID&gt; /krbtgt:&lt;krbtgtHash&gt; /sids:&lt;S-1-5-21-&lt;RootDomain&gt;-519&gt; /startoffset:0 /endin:600 /renewmax:10080 /ticket:\path\to\ticket\golden.kirbi
+</code></pre><p>After creating the ticket, we can pass the ticket and access resources in the root domain as the enterprise admin. We can also perform a dcsync attack.</p>
+<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/ptt.PNG" alt="PTT from child domain" class="lazyload"><figcaption class="image-caption">PTT from child domain</figcaption></figure></p>
+<h1 id="trust-tickets">Trust Tickets</h1>
+<p>As mentioned earlier, when a trust is created there is a shared password called the inter-realm key. When a user presents the inter-realm TGT referral to the external KDC, the user&rsquo;s TGT is included within it. Since the external domain trusts the domain that issued the referral, it trusts that the user&rsquo;s TGT is accurate. This means that we can forge an inter-realm ticket that allows us to impersonate any user in our domain using the inter-realm key. And if we can retrieve the inter-realm key, it&rsquo;s also likely that we can pull the krbtgt hash allowing us to impersonate any user in the external domain/forest.</p>
+<h2 id="forging-trust-tickets">Forging trust tickets</h2>
+<ol>
+<li>Dump trust key</li>
+<li>Create a forged trust ticket</li>
+<li>Use the trust ticket to get a TGS for a service in the targeted domain</li>
+<li>PTT</li>
+</ol>
+<ul>
+<li><code>mimikatz lsadump::trust /patch</code></li>
+<li><code>&gt;&gt; kerberos::golden /domain:current_domain /sid:current_domain_sid /rc4:trust_key /user:Administrator /service:krbtgt /target:external_domain /ticket:path_to_save</code></li>
+<li><code>rubeus asktgs /ticket:path_to_trust_ticket /service:cifs/domain_controller_of_external_domain</code></li>
+</ul>
+<h1 id="sid-filtering">SID Filtering</h1>
+<p>SID History abuse cannot be done through a forest trust because of a protection called SID filtering. When a user&rsquo;s TGT is presented to the external domain, it contains a PAC (privileged attribute certificate). The PAC contains among other things the SIDs of the groups that we are a member of. We can view the PACs through mimikatz using:</p>
+<ul>
+<li><code>sekurlsa::tickets /export</code></li>
+</ul>
+<p>An example of a PAC might look like this:</p>
+<pre tabindex="0"><code>Username: user
+Domain SID: domain-sid
+UserId: 500
+PrimaryGroupId 513
+Member of groups:
+  -&gt;   513 (attributes: 7)
+  -&gt;   520 (attributes: 7)
+  -&gt;   512 (attributes: 7)
+  -&gt;   519 (attributes: 7)
+  -&gt;   518 (attributes: 7)
+LogonServer:  forest-a-dc
+LogonDomainName:  forest-a
+
+Extra SIDS:
+  -&gt;   S-1-18-1
+</code></pre><p>SID filtering will filter out SIDs that are matching a particular patterns. There are certain rules that will be used to filter out these SIDs from being added.</p>
+<p>For example, if there is an SID that is set to <em>AlwaysFilter</em> then it will always be filtered out by the trusting domain/forest regardless of the trust type.</p>
+<p>The enterprise admins group is set to &ldquo;ForestSpecific&rdquo;. According to microsoft:</p>
+<blockquote>
+<ul>
+<li>“The ForestSpecific rule is for those SIDs that are never allowed in a PAC that originates from out of the forest or from a domain that has been marked as QuarantinedWithinForest, unless it belongs to that domain.”</li>
+</ul>
+</blockquote>
+<h1 id="sid-filtering-relaxation">SID Filtering Relaxation</h1>
+<p>There is an option via the netcom tool to allow SID history on cross-forest trusts.</p>
+<p><code>netcom trust /d:forest-a.local forest-b.local /enablesidhistory:yes</code></p>
+<p>After enabling SID history, the trust has the TREAT_AS_EXTERNAL FLAG.</p>
+<blockquote>
+<p><em>If this bit is set, then a cross-forest trust to a domain is to be treated as an external trust for the purposes of SID Filtering. Cross-forest trusts are more stringently filtered than external trusts. This attribute relaxes those cross-forest trusts to be equivalent to external trusts. For more information on how each trust type is filtered, see [MS-PAC] section 4.1.2.2.</em></p>
+</blockquote>
+<p>This means that any SID that is not filtered as <strong>ForestSpecific</strong> in the PAC will be accepted by the DC on Forest B. Any RID greater than 1000 can be spoofed if SID history is enabled across forest trusts.</p>
+<h1 id="breaking-forest-trusts">Breaking Forest Trusts</h1>
+<blockquote>
+<p><em>If we have a bidirectional trust with an external forest and we manage to compromise a machine on the local forest that has enabled unconstrained delegation (DCs have this by default), we can use the printerbug to force the DC of the external forest&rsquo;s root domain to authenticate to us. Then we can capture it&rsquo;s TGT, inject it into memory and DCsync to dump it&rsquo;s hashes, giving ous complete access over the whole forest.</em></p>
+</blockquote>
+<p>This means that if we have a two-way forest trust between Forest-A and Forest-B, then the compromise of any server with unconstrained delegation in Forest-B/Forest-A can be used to compromise the other forest&rsquo;s root domain completely.</p>
+<ol>
+<li>
+<p>Compromise a server with unconstrained delegation. (DC have unconstrained delegation by default)</p>
+</li>
+<li>
+<p>Use Rubeus monitor to monitor for 4624 logon events and extract TGTs from the session via LSA APIs</p>
+</li>
+<li>
+<p>Use the printer bug against a domain controller on the targeted forest.</p>
+</li>
+<li>
+<p>The targeted forest&rsquo;s DC will authenticate to our compromised server as the DC machine account. The TGT will be contained within the service ticket sent to our compromised server and cached in memory.</p>
+</li>
+<li>
+<p>Then we can extract the TGT and PTT to execute a DCSYNC attack and compromise the targeted forest.</p>
+</li>
+</ol>
+<h2 id="demo-1">Demo</h2>
+<ul>
+<li>
+<p>Using Rubeus' monitor:
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/monitor.PNG" alt="rubeus monitor" class="lazyload"><figcaption class="image-caption">rubeus monitor</figcaption></figure></p>
+</li>
+<li>
+<p>Triggering the printer bug with SpoolSample:
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/spool.PNG" alt="spoolsample" class="lazyload"><figcaption class="image-caption">spoolsample</figcaption></figure></p>
+</li>
+<li>
+<p>Receive TGT
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/tgt.PNG" alt="TGT of DC" class="lazyload"><figcaption class="image-caption">TGT of DC</figcaption></figure></p>
+</li>
+<li>
+<p>PTT
+<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/ptt.PNG" alt="PTT" class="lazyload"><figcaption class="image-caption">PTT</figcaption></figure></p>
+</li>
+</ul>
+<h1 id="manual-trust-abuse">Manual Trust Abuse</h1>
+<p>Prior to the days of easily abusing intra-forest trusts via SID History abuse, attackers had to enumerate and map out foreign user/group membership and escalate from child trust to root domain by hand.</p>
+<ul>
+<li>Enumerate and map trust relationships</li>
+<li>Enumerate security principals that have access to resources in another domain, or security principals that are from another domain.</li>
+<li>Utitilze targeted account compromise to pivot through domain trusts to achieve objective.</li>
+</ul>
+<hr>
+<p>In some cases, this may be easier than other methods.</p>
+<p>Let&rsquo;s say there&rsquo;s a user in domainA.local that is also an administrator on the domain controller of domainB.local. If we can compromise that user, it is very simple to compromise domainB.</p>
+<p>There might be many different scenarios depending on the configuration of the active directory environment you are in. While taking CRTO and eCPTXv2, I was able to abuse MSSQL database links across forest trusts.</p>
+<h1 id="mssql-database-link-abuse">MSSQL Database Link Abuse</h1>
+<blockquote>
+<p><em>A database link allows a SQL Server to access other resources like other SQL Server. If we have two linked SQL Servers we can execute stored procedures in them. Database links also works across Forest Trust!</em></p>
+</blockquote>
+<ol>
+<li>Enumerate database links</li>
+<li>We can use queries to enumerate other links from the linked database</li>
+<li>Query execution for RCE</li>
+</ol>
+<ul>
+<li>
+<p>Enumerating existing links:</p>
+<ul>
+<li><code>select * from master..sysservers</code></li>
+</ul>
+</li>
+<li>
+<p>Enumerating other links from the another link:</p>
+<ul>
+<li><code>select * from openquery(&quot;LinkedDatabase&quot;, 'select * from master..sysservers')</code></li>
+</ul>
+</li>
+<li>
+<p>Code execution:</p>
+<ul>
+<li>
+<p><code>Get-SQLServerLinkCrawl -Instance &lt;SPN&gt; -Query &quot;exec master..xp_cmdshell 'whoami'&quot;</code></p>
+</li>
+<li>
+<p><code>SELECT * FROM OPENQUERY(&quot;[LINK]&quot;, 'select @@servername; exec xp_cmdshell ''powershell -w hidden -enc blah''')</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="conclusion">Conclusion</h1>
+<p>These were the attacks and methods that I utilize for CRTO and eCPTX. This is not meant to be a guide or a complete list of attacking trusts. This is just a reorganization of my notes.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Momo </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>1667</span>
+            </p>
+
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+      
+      
+      
+      
+      
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmomo1239.github.io%2f2021%2factive-directory-forest-domain-trusts%2f&amp;title=Active%20Directory%20-%20Forest%20%26%20Domain%20Trusts" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>
+        
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+
+</span>
+                
+            </p>
+
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="https://momo1239.github.io/tags/red-teaming/">
+                    #red teaming</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="https://momo1239.github.io">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://momo1239.github.io/2021/python-shellcode-runner/" class="prev" rel="prev" title="Simple Shellcode Runner in Python3"><i class="iconfont icon-dajiantou"></i>&nbsp;Simple Shellcode Runner in Python3</a>
+         
+        
+        <a href="https://momo1239.github.io/2021/dll/" class="next" rel="next" title="Reflective DLL Injection in Python3">Reflective DLL Injection in Python3&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+
+ 
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://momo1239.github.io">Momo</a> | </span>
+         
+
+		  <span>2021 </span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.10.0/css/lightgallery.min.css" rel="stylesheet">
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

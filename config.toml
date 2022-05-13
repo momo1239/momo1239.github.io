@@ -34,12 +34,17 @@ googleAnalytics = ""
 
   [[menu.main]]
     name = "About"
-    url = "/about"
+    url = "/about/"
+    weight = 4
+  
+  [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
     weight = 4
 
 [params]
     author = "Momo"
-    subtitle = "Penetration Tester | OSCP, CRTO, eCPTXv2"       # Subtitle
+    subtitle = "Professional Script Kiddie | OSCP, CRTO, eCPTXv2"       # Subtitle
     cdn_url = ""           # Base CDN URL
     home_mode = "" # post or other
     dateFormatToUse = "" # set date format, default "2 January 2006"

@@ -4,7 +4,7 @@
     <url>
       <loc>https://momo1239.github.io/</loc>
       
-      <lastmod>2021-11-22T00:00:00+00:00</lastmod>
+      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -18,7 +18,77 @@
     <url>
       <loc>https://momo1239.github.io/posts/</loc>
       
-      <lastmod>2021-11-22T00:00:00+00:00</lastmod>
+      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/python/</loc>
+      
+      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/red-teaming/</loc>
+      
+      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2021/dll/</loc>
+      
+      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/</loc>
+      
+      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2021/active-directory-forest-domain-trusts/</loc>
+      
+      <lastmod>2021-12-12T00:00:00+00:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -44,7 +114,35 @@
     </url>
   
     <url>
+      <loc>https://momo1239.github.io/tags/certification/</loc>
+      
+      <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://momo1239.github.io/2021/crto-review/</loc>
+      
+      <lastmod>2021-11-17T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/review/</loc>
       
       <lastmod>2021-11-17T00:00:00+00:00</lastmod>
       
@@ -73,18 +171,6 @@
   
     <url>
       <loc>https://momo1239.github.io/categories/</loc>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0.5</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://momo1239.github.io/tags/</loc>
       
       
       <changefreq>monthly</changefreq>
