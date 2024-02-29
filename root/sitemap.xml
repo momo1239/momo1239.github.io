@@ -2,7 +2,105 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
-      <loc>https://momo1239.github.io/</loc>
+      <loc>http://localhost:1313/tags/ctf/</loc>
+      
+      <lastmod>2021-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://localhost:1313/tags/exploit-dev/</loc>
+      
+      <lastmod>2021-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://localhost:1313/</loc>
+      
+      <lastmod>2021-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://localhost:1313/posts/</loc>
+      
+      <lastmod>2021-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://localhost:1313/2021/re3-writeup/</loc>
+      
+      <lastmod>2021-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://localhost:1313/tags/reversing/</loc>
+      
+      <lastmod>2021-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://localhost:1313/tags/</loc>
+      
+      <lastmod>2021-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>http://localhost:1313/tags/python/</loc>
       
       <lastmod>2021-12-19T00:00:00+00:00</lastmod>
       
@@ -16,7 +114,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/posts/</loc>
+      <loc>http://localhost:1313/tags/red-teaming/</loc>
       
       <lastmod>2021-12-19T00:00:00+00:00</lastmod>
       
@@ -30,7 +128,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/tags/python/</loc>
+      <loc>http://localhost:1313/2021/dll/</loc>
       
       <lastmod>2021-12-19T00:00:00+00:00</lastmod>
       
@@ -44,49 +142,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/tags/red-teaming/</loc>
-      
-      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0.5</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://momo1239.github.io/2021/dll/</loc>
-      
-      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0.5</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://momo1239.github.io/tags/</loc>
-      
-      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0.5</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://momo1239.github.io/2021/active-directory-forest-domain-trusts/</loc>
+      <loc>http://localhost:1313/2021/active-directory-forest-domain-trusts/</loc>
       
       <lastmod>2021-12-12T00:00:00+00:00</lastmod>
       
@@ -100,7 +156,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/2021/python-shellcode-runner/</loc>
+      <loc>http://localhost:1313/2021/python-shellcode-runner/</loc>
       
       <lastmod>2021-11-22T00:00:00+00:00</lastmod>
       
@@ -114,7 +170,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/tags/certification/</loc>
+      <loc>http://localhost:1313/tags/certification/</loc>
       
       <lastmod>2021-11-17T00:00:00+00:00</lastmod>
       
@@ -128,7 +184,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/2021/crto-review/</loc>
+      <loc>http://localhost:1313/2021/crto-review/</loc>
       
       <lastmod>2021-11-17T00:00:00+00:00</lastmod>
       
@@ -142,7 +198,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/tags/review/</loc>
+      <loc>http://localhost:1313/tags/review/</loc>
       
       <lastmod>2021-11-17T00:00:00+00:00</lastmod>
       
@@ -156,7 +212,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/about/</loc>
+      <loc>http://localhost:1313/about/</loc>
       
       <lastmod>2021-11-10T00:00:00+00:00</lastmod>
       
@@ -170,7 +226,7 @@
     </url>
   
     <url>
-      <loc>https://momo1239.github.io/categories/</loc>
+      <loc>http://localhost:1313/categories/</loc>
       
       
       <changefreq>monthly</changefreq>
