@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Certification on Kenny Nguyen (momo)</title>
-    <link>http://localhost:1313/tags/certification/</link>
+    <link>https://momo1239.github.io/tags/certification/</link>
     <description>Recent content in Certification on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 17 Nov 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/certification/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://momo1239.github.io/tags/certification/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Certified Red Team Operator (CRTO) Review</title>
-      <link>http://localhost:1313/2021/crto-review/</link>
+      <link>https://momo1239.github.io/2021/crto-review/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2021/crto-review/</guid>
+      <guid>https://momo1239.github.io/2021/crto-review/</guid>
       <description>What is CRTO? CRTO is supposed to be an introductory course into red teaming tradecraft, from initial compromise all the way to domain takeover and data exfiltration. From their website:&#xA;&amp;ldquo;Red Team Ops is an online course that teaches the basic principals, tools and techniques, that are synonymous with red teaming.&#xA;Students will first cover the core concepts of adversary simulation, command &amp;amp; control, and how to plan for an engagement.</description>
     </item>
   </channel>

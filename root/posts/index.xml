@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Kenny Nguyen (momo)</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://momo1239.github.io/posts/</link>
     <description>Recent content in Posts on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 21 Dec 2021 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://momo1239.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reverse Engineering Level 3 Writeup</title>
-      <link>http://localhost:1313/2021/re3-writeup/</link>
+      <link>https://momo1239.github.io/2021/re3-writeup/</link>
       <pubDate>Tue, 21 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2021/re3-writeup/</guid>
+      <guid>https://momo1239.github.io/2021/re3-writeup/</guid>
       <description>Reverse Engineering L3 Writeup This is part of a course called Fundamentals of Software Exploitation designed to teach students about exploitation development and vulnerability research. There are various modules and at the end of the modules are three progression challenges. This is the final progression challenge for the Reverse Engineering module.&#xA;Challenge Description Challenge / Response&#xD;Wow, stealing acquiring software is hard work... This one communicates with a server of some kind and makes you submit a ton of valid request-response pairs.</description>
     </item>
     <item>
       <title>Reflective DLL Injection in Python3</title>
-      <link>http://localhost:1313/2021/dll/</link>
+      <link>https://momo1239.github.io/2021/dll/</link>
       <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2021/dll/</guid>
+      <guid>https://momo1239.github.io/2021/dll/</guid>
       <description>What is DLL Injection? DLL Injection is a common evasion technique used by many malware samples. We can execute shellcode in memory of our current process, and inject shellcode into remote processes with process injection. But instead of just shellcode, we can also inject an entire DLL into a remote process as well. DLL injection is the process of inserting code into a running process. DLLs are meant to be loaded as needed at run time.</description>
     </item>
     <item>
       <title>Active Directory - Forest &amp; Domain Trusts</title>
-      <link>http://localhost:1313/2021/active-directory-forest-domain-trusts/</link>
+      <link>https://momo1239.github.io/2021/active-directory-forest-domain-trusts/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2021/active-directory-forest-domain-trusts/</guid>
+      <guid>https://momo1239.github.io/2021/active-directory-forest-domain-trusts/</guid>
       <description>Introduction After taking both the CRTO and eCPTXv2 course, I wanted to reorganize my notes and discuss all the different ways to abuse an active directory trust. This is not a comprehensive list or guide by any means.&#xA;What is a domain trust? An active directory trust relationship allows users in one domain to access resources in another domain. This is done through a system of referrals. When a user requests for access to a resource that is outside of their domain, their KDC will return a referral ticket pointing to the KDC in the external domain.</description>
     </item>
     <item>
       <title>Simple Shellcode Runner in Python3</title>
-      <link>http://localhost:1313/2021/python-shellcode-runner/</link>
+      <link>https://momo1239.github.io/2021/python-shellcode-runner/</link>
       <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2021/python-shellcode-runner/</guid>
+      <guid>https://momo1239.github.io/2021/python-shellcode-runner/</guid>
       <description>Introduction I&amp;rsquo;m going to be discussing executing shellcode in Python. A shellcode runner is a tool that executes shellcode in memory. This technique enables us to avoid downloading malware to the hard drive, which might be flagged by AV software.&#xA;We can use the native windows operating system API to execute shellcode in memory. This is also known as Win32 API. These APIs were designed to be used with C and uses C data types, however, they can be invoked in other languages.</description>
     </item>
     <item>
       <title>Certified Red Team Operator (CRTO) Review</title>
-      <link>http://localhost:1313/2021/crto-review/</link>
+      <link>https://momo1239.github.io/2021/crto-review/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/2021/crto-review/</guid>
+      <guid>https://momo1239.github.io/2021/crto-review/</guid>
       <description>What is CRTO? CRTO is supposed to be an introductory course into red teaming tradecraft, from initial compromise all the way to domain takeover and data exfiltration. From their website:&#xA;&amp;ldquo;Red Team Ops is an online course that teaches the basic principals, tools and techniques, that are synonymous with red teaming.&#xA;Students will first cover the core concepts of adversary simulation, command &amp;amp; control, and how to plan for an engagement.</description>
     </item>
   </channel>
