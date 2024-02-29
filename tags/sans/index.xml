@@ -6,12 +6,13 @@
     <description>Recent content in SANS on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+    <lastBuildDate>Tue, 27 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://momo1239.github.io/tags/sans/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SANS Offensive Operations CTF - Pwn Writeup</title>
-      <link>https://momo1239.github.io/1/sans_ctf_writeup/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://momo1239.github.io/1/sans_ctf_writeup/</guid>
+      <link>https://momo1239.github.io/2024/sans_ctf_writeup/</link>
+      <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2024/sans_ctf_writeup/</guid>
       <description>SANS Offensive Operations CTF This was a challenge in the pwn category of the SANS Offensive Operations 2024 CTF. This is a writeup for the challenge &amp;ldquo;Warmup Pwn&amp;rdquo;. Unfortunately, I did not take any screenshots or save the challenge files so I&amp;rsquo;ll mainly be walking through what I did and the script I made.&#xA;Warmup Pwn - First Look The challenge tells us to connect using nc warmup.pwn.site 5005. They provide us with two files: target and libc-2.</description>
     </item>
   </channel>
