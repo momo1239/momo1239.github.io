@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noodp"/>
   
@@ -21,6 +21,7 @@
   <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
+
   <title>
        
        
@@ -116,17 +117,21 @@ What is a domain trust? An active directory trust relationship allows users in o
     <header class="post-header">
         <h1 class="post-title">Active Directory - Forest &amp; Domain Trusts</h1>
         <div class="post-meta">
-            Written by <a href="https://momo1239.github.io" rel="author">Momo</a> with ♥ 
+            Written by <a href="https://momo1239.github.io" rel="author">Momo</a> with ♥
                 <span class="post-time">
                     on <time datetime=2021-12-12 >12 December 2021</time>
                 </span>
                 in
                 
-                <i class="iconfont icon-timer"></i>
+                &nbsp;<i class="iconfont icon-timer"></i>
                 8 min
         </div>
     </header>
     <div class="post-content">
+
+        
+
+
         
 
         
@@ -135,7 +140,7 @@ What is a domain trust? An active directory trust relationship allows users in o
 
         
         
-     
+
           
           
           
@@ -149,7 +154,7 @@ What is a domain trust? An active directory trust relationship allows users in o
 <h1 id="what-is-a-domain-trust">What is a domain trust?</h1>
 <p>An active directory trust relationship allows users in one domain to access resources in another domain. This is done through a system of referrals. When a user requests for access to a resource that is outside of their domain, their KDC will return a referral ticket pointing to the KDC in the external domain.</p>
 <p>The TGT of the user is included in the TGS-REP of the referral ticket but it is encrypted with the inter-realm key instead of the krbtgt account. The external domain will decrypt the inter-realm TGT with the inter-realm key and returns a TGS-REP back to the user and the user can then proceed to present the TGS to a service.</p>
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/trusts.png" alt="kerberos authentication between cross-domain/forest" class="lazyload"><figcaption class="image-caption">kerberos authentication between cross-domain/forest</figcaption></figure></p>
+<p><img src="/images/trusts.png" alt="kerberos authentication between cross-domain/forest"></p>
 <h2 id="terminology-brief">Terminology Brief</h2>
 <ul>
 <li>Forest: A forest is a collection of domains that can be part of one or more domain trees.</li>
@@ -187,7 +192,7 @@ What is a domain trust? An active directory trust relationship allows users in o
 <p>The process will be the same as creating a golden ticket with the additional sid.</p>
 <pre tabindex="0"><code>kerberos::golden /user:Administrator /domain:&lt;currentdomain&gt; /sid:&lt;CurrentDomainSID&gt; /krbtgt:&lt;krbtgtHash&gt; /sids:&lt;S-1-5-21-&lt;RootDomain&gt;-519&gt; /startoffset:0 /endin:600 /renewmax:10080 /ticket:\path\to\ticket\golden.kirbi
 </code></pre><p>After creating the ticket, we can pass the ticket and access resources in the root domain as the enterprise admin. We can also perform a dcsync attack.</p>
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/ptt.PNG" alt="PTT from child domain" class="lazyload"><figcaption class="image-caption">PTT from child domain</figcaption></figure></p>
+<p><img src="/images/ptt.PNG" alt="PTT from child domain"></p>
 <h1 id="trust-tickets">Trust Tickets</h1>
 <p>As mentioned earlier, when a trust is created there is a shared password called the inter-realm key. When a user presents the inter-realm TGT referral to the external KDC, the user&rsquo;s TGT is included within it. Since the external domain trusts the domain that issued the referral, it trusts that the user&rsquo;s TGT is accurate. This means that we can forge an inter-realm ticket that allows us to impersonate any user in our domain using the inter-realm key. And if we can retrieve the inter-realm key, it&rsquo;s also likely that we can pull the krbtgt hash allowing us to impersonate any user in the external domain/forest.</p>
 <h2 id="forging-trust-tickets">Forging trust tickets</h2>
@@ -264,20 +269,20 @@ Extra SIDS:
 <h2 id="demo-1">Demo</h2>
 <ul>
 <li>
-<p>Using Rubeus' monitor:
-<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/monitor.PNG" alt="rubeus monitor" class="lazyload"><figcaption class="image-caption">rubeus monitor</figcaption></figure></p>
+<p>Using Rubeus&rsquo; monitor:
+<img src="/images/monitor.PNG" alt="rubeus monitor"></p>
 </li>
 <li>
 <p>Triggering the printer bug with SpoolSample:
-<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/spool.PNG" alt="spoolsample" class="lazyload"><figcaption class="image-caption">spoolsample</figcaption></figure></p>
+<img src="/images/spool.PNG" alt="spoolsample"></p>
 </li>
 <li>
 <p>Receive TGT
-<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/tgt.PNG" alt="TGT of DC" class="lazyload"><figcaption class="image-caption">TGT of DC</figcaption></figure></p>
+<img src="/images/tgt.PNG" alt="TGT of DC"></p>
 </li>
 <li>
 <p>PTT
-<figure><img src="/images/ring.svg" data-sizes="auto" data-src="/images/ptt.PNG" alt="PTT" class="lazyload"><figcaption class="image-caption">PTT</figcaption></figure></p>
+<img src="/images/ptt.PNG" alt="PTT"></p>
 </li>
 </ul>
 <h1 id="manual-trust-abuse">Manual Trust Abuse</h1>
@@ -331,39 +336,34 @@ Extra SIDS:
     </div>
 
     <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>Momo </span>
-                </p>
+        <div class="author">
+            <figure class="author-image">
+                <a href="/about" class="image" alt="MomoDawg">
+                <span class="hidden">About Momo</span></a>
+            </figure>
+        </div>
+
+        <p class="copyright-item">
             
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>1667</span>
-            </p>
-
-            <p class="copyright-item">
-                
-                <span>Share:</span>
-                <span>
+            <h4>Share This Post:</h4>
+            <span class="share-icons">
 
       
+
       
+
       
-      
-      
-      
+
       
         <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmomo1239.github.io%2f2021%2factive-directory-forest-domain-trusts%2f&amp;title=Active%20Directory%20-%20Forest%20%26%20Domain%20Trusts" target="_blank" title="Share on LinkedIn">
           <i class="iconfont icon-linkedin"></i>
-        </a>
+        </a>&nbsp;
         
+
       
+
       
-        
-      
-        
+
       
 
           
@@ -373,27 +373,25 @@ Extra SIDS:
           
 
           
-
 </span>
-                
-            </p>
+        </p>
+                    
 
-            
+        
     </div>
 
-  
+
     <div class="post-tags">
         
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
+        <section>
+            <i class="iconfont icon-icon-tag"></i>
             
-            <span class="tag"><a href="https://momo1239.github.io/tags/red-teaming/">
-                    #red teaming</a></span>
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/red-teaming/">red teaming</a></span>
             
-            </section>
+        </section>
         
         <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
+                <a href="javascript:window.history.back();">Back</a></span> ·
                 <span><a href="https://momo1239.github.io">Home</a></span>
         </section>
     </div>
@@ -401,7 +399,7 @@ Extra SIDS:
     <div class="post-nav">
         
         <a href="https://momo1239.github.io/2021/python-shellcode-runner/" class="prev" rel="prev" title="Simple Shellcode Runner in Python3"><i class="iconfont icon-dajiantou"></i>&nbsp;Simple Shellcode Runner in Python3</a>
-         
+        
         
         <a href="https://momo1239.github.io/2021/dll/" class="next" rel="next" title="Reflective DLL Injection in Python3">Reflective DLL Injection in Python3&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
         
@@ -410,8 +408,8 @@ Extra SIDS:
     <div class="post-comment">
           
           
+  
 
- 
 
           
     </div>
@@ -419,14 +417,75 @@ Extra SIDS:
           </div>
 		   </main>
       <footer class="footer">
-    <div class="copyright">
+    <div class="footer-social"> Get in touch: 
+<a href="https://github.com/momo1239" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-github"></i></a>
+
+
+<a href="https://linkedin.com/in/kenny-nguyen-2a3022152" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-linkedin"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
+    <div class="copyright" itemscope>
         &copy;
         
          
             <span class="author" itemprop="copyrightHolder"><a href="https://momo1239.github.io">Momo</a> | </span>
          
 
-		  <span>2021 </span>
+          <span>🛠️ with <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hugo</a> | Based on <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreferrer">KeepIt</a></span>
     </div>
 </footer>
 
@@ -442,11 +501,11 @@ Extra SIDS:
 
 
     
-    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.10.0/css/lightgallery.min.css" rel="stylesheet">
-      
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
+     
      <script src="/js/vendor_gallery.min.js" async="" ></script>
     
-  
+
 
 
 
