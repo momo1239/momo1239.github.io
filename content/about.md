@@ -20,14 +20,15 @@ Lenard. Offensive security research.
 - Vulnerability Research
 - Cryptography
 
--[Linkedin](https://www.linkedin.com/in/kenny-nguyen-2a3022152/)
+[Linkedin](https://www.linkedin.com/in/kenny-nguyen-2a3022152/)
 
--[Github](https://github.com/momo1239)
+[Github](https://github.com/momo1239)
 
 # Certifications
 - Masters of Science in Cybersecurity
+- Offensive Security Experienced Penetration Tester (OSEP)
 - Offensive Security Certified Professional (OSCP)
 - eLearnSecurity Certified Penetration Tester eXtreme v2 (eCPTXv2)
 - Certified Red Team Operator (CRTO)
-- Certified Ethical Hacker (CEH)
-- CompTIA Security+
+- Certified UnEthical Hacker (CUEH)
+- CompTIA SecNetCloudLinAProj+ 
