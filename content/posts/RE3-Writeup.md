@@ -1,6 +1,6 @@
 ﻿---
 title: "Reverse Engineering Level 3 Writeup"
-date: 2023-12-21
+date: 2021-12-21
 tags: ["exploit-dev", "reversing", "ctf"]
 draft: false
 ---
