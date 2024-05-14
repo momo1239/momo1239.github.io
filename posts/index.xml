@@ -23,6 +23,13 @@
       <description>Reverse Engineering L3 Writeup This is part of a course called Fundamentals of Software Exploitation designed to teach students about exploitation development and vulnerability research. There are various modules and at the end of the modules are three progression challenges. This is the final progression challenge for the Reverse Engineering module.&#xA;Challenge Description Challenge / Response&#xD;Wow, stealing acquiring software is hard work... This one communicates with a server of some kind and makes you submit a ton of valid request-response pairs.</description>
     </item>
     <item>
+      <title>Lame ZeroDay Research: SQL Injection and XSS in CVE-2023-24203 &amp; CVE-2023-24204</title>
+      <link>https://momo1239.github.io/2023/cve-2023-24203/</link>
+      <pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2023/cve-2023-24203/</guid>
+      <description>CVE-2023-24203-and-CVE-2023-24204 Introduction In the ever-evolving landscape of cybersecurity, web applications remain a prime target for attackers seeking to exploit vulnerabilities. Recently, two critical vulnerabilities were discovered in the SourceCodester Simple Customer Relationship Management (CRM) System v1.0: CVE-2023-24203 and CVE-2023-24204. These vulnerabilities, involving Cross-Site Scripting (XSS) and SQL Injection, pose significant risks including arbitrary code execution and unauthorized access. Understanding these vulnerabilities and their impacts is essential for developers and security professionals to safeguard systems from potential threats.</description>
+    </item>
+    <item>
       <title>Reflective DLL Injection in Python3</title>
       <link>https://momo1239.github.io/2021/dll/</link>
       <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>

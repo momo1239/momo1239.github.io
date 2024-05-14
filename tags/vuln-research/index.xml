@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vuln-Research on Kenny Nguyen (momo)</title>
+    <link>https://momo1239.github.io/tags/vuln-research/</link>
+    <description>Recent content in Vuln-Research on Kenny Nguyen (momo)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 04 Feb 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://momo1239.github.io/tags/vuln-research/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lame ZeroDay Research: SQL Injection and XSS in CVE-2023-24203 &amp; CVE-2023-24204</title>
+      <link>https://momo1239.github.io/2023/cve-2023-24203/</link>
+      <pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2023/cve-2023-24203/</guid>
+      <description>CVE-2023-24203-and-CVE-2023-24204 Introduction In the ever-evolving landscape of cybersecurity, web applications remain a prime target for attackers seeking to exploit vulnerabilities. Recently, two critical vulnerabilities were discovered in the SourceCodester Simple Customer Relationship Management (CRM) System v1.0: CVE-2023-24203 and CVE-2023-24204. These vulnerabilities, involving Cross-Site Scripting (XSS) and SQL Injection, pose significant risks including arbitrary code execution and unauthorized access. Understanding these vulnerabilities and their impacts is essential for developers and security professionals to safeguard systems from potential threats.</description>
+    </item>
+  </channel>
+</rss>
