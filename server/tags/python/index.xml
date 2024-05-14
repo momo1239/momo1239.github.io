@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Kenny Nguyen (momo)</title>
+    <link>https://momo1239.github.io/tags/python/</link>
+    <description>Recent content in Python on Kenny Nguyen (momo)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 19 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://momo1239.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reflective DLL Injection in Python3</title>
+      <link>https://momo1239.github.io/2021/dll/</link>
+      <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2021/dll/</guid>
+      <description>What is DLL Injection? DLL Injection is a common evasion technique used by many malware samples. We can execute shellcode in memory of our current process, and inject shellcode into remote processes with process injection. But instead of just shellcode, we can also inject an entire DLL into a remote process as well. DLL injection is the process of inserting code into a running process. DLLs are meant to be loaded as needed at run time.</description>
+    </item>
+  </channel>
+</rss>

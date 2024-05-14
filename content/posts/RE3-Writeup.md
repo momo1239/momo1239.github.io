@@ -1,6 +1,6 @@
 ﻿---
 title: "Reverse Engineering Level 3 Writeup"
-date: 2021-12-21
+date: 2023-12-21
 tags: ["exploit-dev", "reversing", "ctf"]
 draft: false
 ---
@@ -12,7 +12,8 @@ This is part of a course called Fundamentals of Software Exploitation designed t
 ```
 Challenge / Response
 
-Wow, stealing acquiring software is hard work... This one communicates with a server of some kind and makes you submit a ton of valid request-response pairs.
+Wow, stealing acquiring software is hard work... 
+This one communicates with a server of some kind and makes you submit a ton of valid request-response pairs.
 
 This is a tricky one, but we think you're ready for it.
 ```
