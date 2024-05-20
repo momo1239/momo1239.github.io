@@ -6,13 +6,13 @@
     <description>Recent content in Vuln-Research on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 19 May 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 May 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://momo1239.github.io/tags/vuln-research/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lame ZeroDay Research: Stack Based Buffer Overflow in CVE-2024-XYZA</title>
-      <link>https://momo1239.github.io/2023/cve-2024/</link>
-      <pubDate>Fri, 19 May 2023 00:00:00 +0000</pubDate>
-      <guid>https://momo1239.github.io/2023/cve-2024/</guid>
+      <link>https://momo1239.github.io/2024/cve-2024/</link>
+      <pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2024/cve-2024/</guid>
       <description>TLDR Checkout https://github.com/momo1239 for proof of concept inputs.&#xA;CVE-2024-XYZA A stack buffer overflow vulnerability exists in the charset handling functionality of html2xhtml version 1.3. An attacker can exploit this vulnerability by providing a specially crafted input, which would lead to the overflow of the &amp;lsquo;buf&amp;rsquo; variable located on the stack. Successful exploitation of this vulnerability could allow an attacker to execute arbitrary code or crash the application, leading to denial of service.</description>
     </item>
     <item>

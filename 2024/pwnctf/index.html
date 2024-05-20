@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://momo1239.github.io/2024/sans_ctf_writeup/" />
+  <link rel="next" href="https://momo1239.github.io/2024/cve-2024/" />
+  <link rel="canonical" href="https://momo1239.github.io/2024/pwnctf/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>
+       
+       
+           BYUCTF PWN Challenge Writeups | Kenny Nguyen (momo)
+       
+  </title>
+  <meta name="title" content="BYUCTF PWN Challenge Writeups | Kenny Nguyen (momo)">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="BYUCTF PWN Challenge Writeups"/>
+<meta name="twitter:description" content="BYU CTF 2x PWN Challenge Writeup Link to youtube video: https://www.youtube.com/watch?v=zlso9DMZXAc&amp;t=596s"/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "BYUCTF PWN Challenge Writeups",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/momo1239.github.io\/2024\/pwnctf\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "ctf, binary exploitation, rop",
+  "wordcount":  11 ,
+  "url": "https:\/\/momo1239.github.io\/2024\/pwnctf\/",
+  "datePublished": "2024-05-17T00:00:00\u002b00:00",
+  "dateModified": "2024-05-17T00:00:00\u002b00:00",
+  
+  
+  
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://momo1239.github.io/">Kenny Nguyen (momo)</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://momo1239.github.io/">Kenny Nguyen (momo)</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">BYUCTF PWN Challenge Writeups</h1>
+        <div class="post-meta">
+            Written by <a href="https://momo1239.github.io/" rel="author">Momo</a> with ♥
+                <span class="post-time">
+                    on <time datetime=2024-05-17 >17 May 2024</time>
+                </span>
+                in
+                
+                &nbsp;<i class="iconfont icon-timer"></i>
+                1 min
+        </div>
+    </header>
+    <div class="post-content">
+
+        
+
+
+        
+
+        
+
+        
+        
+
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="byu-ctf-2x-pwn-challenge-writeup">BYU CTF 2x PWN Challenge Writeup</h1>
+<p>Link to youtube video:
+<a href="https://www.youtube.com/watch?v=zlso9DMZXAc&amp;t=596s">https://www.youtube.com/watch?v=zlso9DMZXAc&amp;t=596s</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+        <div class="author">
+            <figure class="author-image">
+                <a href="/about" class="image" alt="MomoDawg">
+                <span class="hidden">About Momo</span></a>
+            </figure>
+        </div>
+
+        <p class="copyright-item">
+            
+            <h4>Share This Post:</h4>
+            <span class="share-icons">
+
+      
+
+      
+
+      
+
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmomo1239.github.io%2f2024%2fpwnctf%2f&amp;title=BYUCTF%20PWN%20Challenge%20Writeups" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>&nbsp;
+        
+
+      
+
+      
+
+      
+
+          
+
+          
+
+          
+
+          
+</span>
+        </p>
+                    
+
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/ctf/">ctf</a></span>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/binary-exploitation/">binary exploitation</a></span>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/rop/">rop</a></span>
+            
+        </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> ·
+                <span><a href="https://momo1239.github.io/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://momo1239.github.io/2024/sans_ctf_writeup/" class="prev" rel="prev" title="SANS Offensive Operations CTF - Pwn Writeup"><i class="iconfont icon-dajiantou"></i>&nbsp;SANS Offensive Operations CTF - Pwn Writeup</a>
+        
+        
+        <a href="https://momo1239.github.io/2024/cve-2024/" class="next" rel="next" title="Lame ZeroDay Research: Stack Based Buffer Overflow in CVE-2024-XYZA">Lame ZeroDay Research: Stack Based Buffer Overflow in CVE-2024-XYZA&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="footer-social"> Get in touch: 
+<a href="https://github.com/momo1239" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-github"></i></a>
+
+
+<a href="https://linkedin.com/in/kenny-nguyen-2a3022152" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-linkedin"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
+    <div class="copyright" itemscope>
+        &copy;
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://momo1239.github.io/">Momo</a> | </span>
+         
+
+          <span>🛠️ with <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hugo</a> | Based on <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreferrer">KeepIt</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>
