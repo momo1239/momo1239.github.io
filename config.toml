@@ -44,8 +44,8 @@ googleAnalytics = ""
 
 [params]
     author = "Momo"
-    subtitle = "Offensive Security Noob @ Meta"
-    subtitle_additional = "Red Teaming, Malware Dev, Vuln Research"  
+    subtitle = "Unprofessional Hacking Noob @ MetaVerse"
+    subtitle_additional = "Red Teaming, Keyboard Monkey, Vuln Research"  
     cdn_url = ""           # Base CDN URL
     home_mode = "" # post or other
     dateFormatToUse = "" # set date format, default "2 January 2006"

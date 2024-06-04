@@ -16,9 +16,8 @@ aliases = ["about-us","about-hugo","contact"]
 
 Lenard. Offensive security research.
 - Adverserial Emulation / Red Teaming
-- Malware Dev
+- IoT Security
 - Vulnerability Research
-- Cryptography
 
 [Linkedin](https://www.linkedin.com/in/kenny-nguyen-2a3022152/)
 
