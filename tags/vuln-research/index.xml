@@ -6,8 +6,15 @@
     <description>Recent content in Vuln-Research on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 19 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Jun 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://momo1239.github.io/tags/vuln-research/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Discovering a Blind XXE in an ICS Web App</title>
+      <link>https://momo1239.github.io/2024/xxe_writeup/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2024/xxe_writeup/</guid>
+      <description>Public Security Research: XML External Entities Vulnerability Discovery Recently, I did some public security research and discovered a critical security vulnerability in a login portal. The login portal was using SAML protocol for SSO authentication with a vulnerable XML parser in the backend. This allows for an attacker (or researcher like me) to exploit an XXE and perform sensitive file read on the server. In this writeup, I&amp;rsquo;ll be discussing my methodology and how I discovered this vulnerability.</description>
+    </item>
     <item>
       <title>Lame ZeroDay Research: Stack Based Buffer Overflow in CVE-2024-XYZA</title>
       <link>https://momo1239.github.io/2024/cve-2024/</link>

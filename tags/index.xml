@@ -6,8 +6,29 @@
     <description>Recent content in Tags on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 19 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Jun 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://momo1239.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bug-Bounty</title>
+      <link>https://momo1239.github.io/tags/bug-bounty/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/bug-bounty/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vuln-Research</title>
+      <link>https://momo1239.github.io/tags/vuln-research/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/vuln-research/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web-Hacking</title>
+      <link>https://momo1239.github.io/tags/web-hacking/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/web-hacking/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Buffer Overflow</title>
       <link>https://momo1239.github.io/tags/buffer-overflow/</link>
@@ -20,13 +41,6 @@
       <link>https://momo1239.github.io/tags/memory-corruption/</link>
       <pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate>
       <guid>https://momo1239.github.io/tags/memory-corruption/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Vuln-Research</title>
-      <link>https://momo1239.github.io/tags/vuln-research/</link>
-      <pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://momo1239.github.io/tags/vuln-research/</guid>
       <description></description>
     </item>
     <item>
