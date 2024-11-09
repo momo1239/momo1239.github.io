@@ -6,46 +6,84 @@
     <description>Recent content in Posts on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 19 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://momo1239.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://momo1239.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Review of Mobile App Pentesting Certifications</title>
+      <link>https://momo1239.github.io/2024/mobile-cert/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2024/mobile-cert/</guid>
+      <description>Review of Mobile App Pentest Certifications State of Mobile App Certs and My Journey The landscape of mobile app penetration testing certifications has been evolving rapidly. However, as a beginner to mobile app penetration testing, there isn&amp;rsquo;t as many resources compared to other domains of offensive security. At the moment, mobile app pentesting is still a niche domain in offsec and is not talked about much.&#xA;Recently, I began getting into mobile app pentesting.</description>
+    </item>
+    <item>
+      <title>Discovering a Blind XXE in an ICS Web App</title>
+      <link>https://momo1239.github.io/2024/xxe_writeup/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2024/xxe_writeup/</guid>
+      <description>Public Security Research: XML External Entities Vulnerability Discovery Recently, I did some public security research and discovered a critical security vulnerability in a login portal. The login portal was using SAML protocol for SSO authentication with a vulnerable XML parser in the backend. This allows for an attacker (or researcher like me) to exploit an XXE and perform sensitive file read on the server. In this writeup, I&amp;rsquo;ll be discussing my methodology and how I discovered this vulnerability.</description>
+    </item>
+    <item>
+      <title>Lame ZeroDay Research: Stack Based Buffer Overflow in CVE-2024-XYZA</title>
+      <link>https://momo1239.github.io/2024/cve-2024/</link>
+      <pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2024/cve-2024/</guid>
+      <description>TLDR Checkout https://github.com/momo1239 for proof of concept inputs.&#xA;CVE-2024-XYZA A stack buffer overflow vulnerability exists in the charset handling functionality of html2xhtml version 1.3. An attacker can exploit this vulnerability by providing a specially crafted input, which would lead to the overflow of the &amp;lsquo;buf&amp;rsquo; variable located on the stack. Successful exploitation of this vulnerability could allow an attacker to execute arbitrary code or crash the application, leading to denial of service.</description>
+    </item>
+    <item>
+      <title>BYUCTF PWN Challenge Writeups</title>
+      <link>https://momo1239.github.io/2024/pwnctf/</link>
+      <pubDate>Fri, 17 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2024/pwnctf/</guid>
+      <description>BYU CTF 2x PWN Challenge Writeup Link to youtube video: https://www.youtube.com/watch?v=zlso9DMZXAc</description>
+    </item>
+    <item>
+      <title>SANS Offensive Operations CTF - Pwn Writeup</title>
+      <link>https://momo1239.github.io/2024/sans_ctf_writeup/</link>
+      <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2024/sans_ctf_writeup/</guid>
+      <description>SANS Offensive Operations CTF This was a challenge in the pwn category of the SANS Offensive Operations 2024 CTF. This is a writeup for the challenge &amp;ldquo;Warmup Pwn&amp;rdquo;. Unfortunately, I did not take any screenshots or save the challenge files so I&amp;rsquo;ll mainly be walking through what I did and the script I made.&#xA;Warmup Pwn - First Look The challenge tells us to connect using nc warmup.pwn.site 5005. They provide us with two files: target and libc-2.</description>
+    </item>
+    <item>
+      <title>Reverse Engineering Level 3 Writeup</title>
+      <link>https://momo1239.github.io/2023/re3-writeup/</link>
+      <pubDate>Thu, 21 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2023/re3-writeup/</guid>
+      <description>Reverse Engineering L3 Writeup This is part of a course called Fundamentals of Software Exploitation designed to teach students about exploitation development and vulnerability research. There are various modules and at the end of the modules are three progression challenges. This is the final progression challenge for the Reverse Engineering module.&#xA;Challenge Description Challenge / Response&#xD;Wow, stealing acquiring software is hard work... This one communicates with a server of some kind and makes you submit a ton of valid request-response pairs.</description>
+    </item>
+    <item>
+      <title>Lame ZeroDay Research: SQL Injection and XSS in CVE-2023-24203 &amp; CVE-2023-24204</title>
+      <link>https://momo1239.github.io/2023/cve-2023-24203/</link>
+      <pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/2023/cve-2023-24203/</guid>
+      <description>CVE-2023-24203-and-CVE-2023-24204 Introduction In the ever-evolving landscape of cybersecurity, web applications remain a prime target for attackers seeking to exploit vulnerabilities. Recently, two critical vulnerabilities were discovered in the SourceCodester Simple Customer Relationship Management (CRM) System v1.0: CVE-2023-24203 and CVE-2023-24204. These vulnerabilities, involving Cross-Site Scripting (XSS) and SQL Injection, pose significant risks including arbitrary code execution and unauthorized access. Understanding these vulnerabilities and their impacts is essential for developers and security professionals to safeguard systems from potential threats.</description>
+    </item>
     <item>
       <title>Reflective DLL Injection in Python3</title>
       <link>https://momo1239.github.io/2021/dll/</link>
       <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://momo1239.github.io/2021/dll/</guid>
       <description>What is DLL Injection? DLL Injection is a common evasion technique used by many malware samples. We can execute shellcode in memory of our current process, and inject shellcode into remote processes with process injection. But instead of just shellcode, we can also inject an entire DLL into a remote process as well. DLL injection is the process of inserting code into a running process. DLLs are meant to be loaded as needed at run time.</description>
     </item>
-    
     <item>
       <title>Active Directory - Forest &amp; Domain Trusts</title>
       <link>https://momo1239.github.io/2021/active-directory-forest-domain-trusts/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://momo1239.github.io/2021/active-directory-forest-domain-trusts/</guid>
-      <description>Introduction After taking both the CRTO and eCPTXv2 course, I wanted to reorganize my notes and discuss all the different ways to abuse an active directory trust. This is not a comprehensive list or guide by any means.
-What is a domain trust? An active directory trust relationship allows users in one domain to access resources in another domain. This is done through a system of referrals. When a user requests for access to a resource that is outside of their domain, their KDC will return a referral ticket pointing to the KDC in the external domain.</description>
+      <description>Introduction After taking both the CRTO and eCPTXv2 course, I wanted to reorganize my notes and discuss all the different ways to abuse an active directory trust. This is not a comprehensive list or guide by any means.&#xA;What is a domain trust? An active directory trust relationship allows users in one domain to access resources in another domain. This is done through a system of referrals. When a user requests for access to a resource that is outside of their domain, their KDC will return a referral ticket pointing to the KDC in the external domain.</description>
     </item>
-    
     <item>
       <title>Simple Shellcode Runner in Python3</title>
       <link>https://momo1239.github.io/2021/python-shellcode-runner/</link>
       <pubDate>Mon, 22 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://momo1239.github.io/2021/python-shellcode-runner/</guid>
-      <description>Introduction I&amp;rsquo;m going to be discussing executing shellcode in Python. A shellcode runner is a tool that executes shellcode in memory. This technique enables us to avoid downloading malware to the hard drive, which might be flagged by AV software.
-We can use the native windows operating system API to execute shellcode in memory. This is also known as Win32 API. These APIs were designed to be used with C and uses C data types, however, they can be invoked in other languages.</description>
+      <description>Introduction I&amp;rsquo;m going to be discussing executing shellcode in Python. A shellcode runner is a tool that executes shellcode in memory. This technique enables us to avoid downloading malware to the hard drive, which might be flagged by AV software.&#xA;We can use the native windows operating system API to execute shellcode in memory. This is also known as Win32 API. These APIs were designed to be used with C and uses C data types, however, they can be invoked in other languages.</description>
     </item>
-    
     <item>
       <title>Certified Red Team Operator (CRTO) Review</title>
       <link>https://momo1239.github.io/2021/crto-review/</link>
       <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://momo1239.github.io/2021/crto-review/</guid>
-      <description>What is CRTO? CRTO is supposed to be an introductory course into red teaming tradecraft, from initial compromise all the way to domain takeover and data exfiltration. From their website:
- &amp;ldquo;Red Team Ops is an online course that teaches the basic principals, tools and techniques, that are synonymous with red teaming.
-Students will first cover the core concepts of adversary simulation, command &amp;amp; control, and how to plan for an engagement.</description>
+      <description>What is CRTO? CRTO is supposed to be an introductory course into red teaming tradecraft, from initial compromise all the way to domain takeover and data exfiltration. From their website:&#xA;&amp;ldquo;Red Team Ops is an online course that teaches the basic principals, tools and techniques, that are synonymous with red teaming.&#xA;Students will first cover the core concepts of adversary simulation, command &amp;amp; control, and how to plan for an engagement.</description>
     </item>
-    
   </channel>
 </rss>

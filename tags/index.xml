@@ -6,42 +6,140 @@
     <description>Recent content in Tags on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 19 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://momo1239.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://momo1239.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>python</title>
-      <link>https://momo1239.github.io/tags/python/</link>
-      <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://momo1239.github.io/tags/python/</guid>
+      <title>Certs</title>
+      <link>https://momo1239.github.io/tags/certs/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/certs/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>red teaming</title>
-      <link>https://momo1239.github.io/tags/red-teaming/</link>
-      <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://momo1239.github.io/tags/red-teaming/</guid>
+      <title>Mobile-App</title>
+      <link>https://momo1239.github.io/tags/mobile-app/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/mobile-app/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>certification</title>
-      <link>https://momo1239.github.io/tags/certification/</link>
-      <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://momo1239.github.io/tags/certification/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>review</title>
+      <title>Review</title>
       <link>https://momo1239.github.io/tags/review/</link>
-      <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
-      
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
       <guid>https://momo1239.github.io/tags/review/</guid>
       <description></description>
     </item>
-    
+    <item>
+      <title>Bug-Bounty</title>
+      <link>https://momo1239.github.io/tags/bug-bounty/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/bug-bounty/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Vuln-Research</title>
+      <link>https://momo1239.github.io/tags/vuln-research/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/vuln-research/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web-Hacking</title>
+      <link>https://momo1239.github.io/tags/web-hacking/</link>
+      <pubDate>Mon, 03 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/web-hacking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Buffer Overflow</title>
+      <link>https://momo1239.github.io/tags/buffer-overflow/</link>
+      <pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/buffer-overflow/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Memory Corruption</title>
+      <link>https://momo1239.github.io/tags/memory-corruption/</link>
+      <pubDate>Sun, 19 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/memory-corruption/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Binary Exploitation</title>
+      <link>https://momo1239.github.io/tags/binary-exploitation/</link>
+      <pubDate>Fri, 17 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/binary-exploitation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ctf</title>
+      <link>https://momo1239.github.io/tags/ctf/</link>
+      <pubDate>Fri, 17 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/ctf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rop</title>
+      <link>https://momo1239.github.io/tags/rop/</link>
+      <pubDate>Fri, 17 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/rop/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Exploit-Dev</title>
+      <link>https://momo1239.github.io/tags/exploit-dev/</link>
+      <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/exploit-dev/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SANS</title>
+      <link>https://momo1239.github.io/tags/sans/</link>
+      <pubDate>Tue, 27 Feb 2024 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/sans/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reversing</title>
+      <link>https://momo1239.github.io/tags/reversing/</link>
+      <pubDate>Thu, 21 Dec 2023 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/reversing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sqli</title>
+      <link>https://momo1239.github.io/tags/sqli/</link>
+      <pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/sqli/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Xss</title>
+      <link>https://momo1239.github.io/tags/xss/</link>
+      <pubDate>Sat, 04 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/xss/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://momo1239.github.io/tags/python/</link>
+      <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Red Teaming</title>
+      <link>https://momo1239.github.io/tags/red-teaming/</link>
+      <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/red-teaming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Certification</title>
+      <link>https://momo1239.github.io/tags/certification/</link>
+      <pubDate>Wed, 17 Nov 2021 00:00:00 +0000</pubDate>
+      <guid>https://momo1239.github.io/tags/certification/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

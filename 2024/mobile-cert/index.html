@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://momo1239.github.io/2024/xxe_writeup/" />
+  
+  <link rel="canonical" href="https://momo1239.github.io/2024/mobile-cert/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>
+       
+       
+           Review of Mobile App Pentesting Certifications | Kenny Nguyen (momo)
+       
+  </title>
+  <meta name="title" content="Review of Mobile App Pentesting Certifications | Kenny Nguyen (momo)">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Review of Mobile App Pentesting Certifications"/>
+<meta name="twitter:description" content="Review of Mobile App Pentest Certifications State of Mobile App Certs and My Journey The landscape of mobile app penetration testing certifications has been evolving rapidly. However, as a beginner to mobile app penetration testing, there isn&rsquo;t as many resources compared to other domains of offensive security. At the moment, mobile app pentesting is still a niche domain in offsec and is not talked about much.
+Recently, I began getting into mobile app pentesting."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Review of Mobile App Pentesting Certifications",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/momo1239.github.io\/2024\/mobile-cert\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "review, certs, mobile-app",
+  "wordcount":  616 ,
+  "url": "https:\/\/momo1239.github.io\/2024\/mobile-cert\/",
+  "datePublished": "2024-10-11T00:00:00\u002b00:00",
+  "dateModified": "2024-10-11T00:00:00\u002b00:00",
+  
+  
+  
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://momo1239.github.io/">Kenny Nguyen (momo)</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://momo1239.github.io/">Kenny Nguyen (momo)</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Review of Mobile App Pentesting Certifications</h1>
+        <div class="post-meta">
+            Written by <a href="https://momo1239.github.io/" rel="author">Momo</a> with ♥
+                <span class="post-time">
+                    on <time datetime=2024-10-11 >11 October 2024</time>
+                </span>
+                in
+                
+                &nbsp;<i class="iconfont icon-timer"></i>
+                3 min
+        </div>
+    </header>
+    <div class="post-content">
+
+        
+
+
+        
+
+        
+            
+        
+
+        
+        
+
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="review-of-mobile-app-pentest-certifications">Review of Mobile App Pentest Certifications</h1>
+<h2 id="state-of-mobile-app-certs-and-my-journey">State of Mobile App Certs and My Journey</h2>
+<p>The landscape of mobile app penetration testing certifications has been evolving rapidly. However, as a beginner to mobile app penetration testing, there isn&rsquo;t as many resources compared to other domains of offensive security. At the moment, mobile app pentesting is still a niche domain in offsec and is not talked about much.</p>
+<p>Recently, I began getting into mobile app pentesting. TCM Academy has a mobile app hacking course with a follow on certification called Practical Junior Mobile Tester (PJMT). This caught my eye as I&rsquo;ve used TCM in the past but the course and certification is pretty basic. I decided to also do CMPen - Android from The SecOps Group. CMPen is an intermediate mobile app certification and is a notch higher level than PJMT.</p>
+<h2 id="cmpen---android-secops-group">CMPEN - Android (SecOps Group)</h2>
+<p>The CMPEN - Android certification by SecOps Group is a mix between multiple choice and capture the flag. Although the exam is marketed as a &ldquo;pentest&rdquo; like PJMT, the exam is a bit more difficult than PJMT and fills in the gaps that were missing on the PJMT exam. The CMPen is 15 questions and require you to answer the question or input a flag. The exam also requires you to have your own setup and tools. They give you a VPN and an APK file then you go to town hacking away.</p>
+<p>Also important to note, SecOps Group regularly has sales for their certifications. I was able to take this exam at 70% off (normal price is about 250 euros). During black friday, they have deals up to 90% off their certifications. I recommend anyone new to mobile app testing to take this exam after PJMT.</p>
+<h2 id="pjmt-from-tcm">PJMT from TCM</h2>
+<p>The Practical Junior Mobile Tester (PJMT) certification from TCM Security is a junior level course and exam. This course walks you through the basics of mobile app testing and gets you familiarized with the tools of the trade. In my opinion, the course is extremely basic and the exam is pretty easy but it&rsquo;s a good way to pivot into learning mobile apps for beginners. The exam gives you more than enough time to complete. Almost too much. The exam supplies you with an attack box with all the tools you need pre-installed. They will give you a Rules of Engagement letter with the scope and expectations for the &ldquo;pentest&rdquo;. There is a bit less directions with the PJMT exam because it&rsquo;s geared as a &ldquo;pentest&rdquo; and not a multiple choice or capture the flag exam with questions and answers. This is pretty unique and I think TCM is doing a good job with that approach. Despite that, the exam was pretty basic and the course will teach you everything you need to pass.</p>
+<h3 id="my-review-and-the-future">My Review and the Future</h3>
+<p>The course structure is well-organized, and the practical exam was still pretty rewarding. The basic methodologies provided a decent insight on mobile app penetration testing. However, I felt that the certification could have included more scenarios on the dynamic analysis side of the house and forced you to do more with Frida/Objection.</p>
+<p>I would recommend anyone interested in mobile app pentesting and has zero knowledge of mobile apps to take PJMT from TCM and then do CMPEN after. I am currently doing 7asecurity mobile and iot app hacking course. Once I have finish that certification I will also take CMPEN - IOS. 7asecurity is a bit more comprehensive and indepth. Maybe I&rsquo;ll write a review on it when I&rsquo;m done. Harhar. Ok that&rsquo;s all I got. If anyone&rsquo;s reading this and has any questions on these feel free to ask me on discord.</p>
+<p><img src="/images/cmpen.png" alt="Cert Baby">
+<img src="/images/pjmt.png" alt="Cert Babyyy"></p>
+
+    </div>
+
+    <div class="post-copyright">
+        <div class="author">
+            <figure class="author-image">
+                <a href="/about" class="image" alt="MomoDawg">
+                <span class="hidden">About Momo</span></a>
+            </figure>
+        </div>
+
+        <p class="copyright-item">
+            
+            <h4>Share This Post:</h4>
+            <span class="share-icons">
+
+      
+
+      
+
+      
+
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmomo1239.github.io%2f2024%2fmobile-cert%2f&amp;title=Review%20of%20Mobile%20App%20Pentesting%20Certifications" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>&nbsp;
+        
+
+      
+
+      
+
+      
+
+          
+
+          
+
+          
+
+          
+</span>
+        </p>
+                    
+
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/review/">review</a></span>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/certs/">certs</a></span>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/mobile-app/">mobile-app</a></span>
+            
+        </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> ·
+                <span><a href="https://momo1239.github.io/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://momo1239.github.io/2024/xxe_writeup/" class="prev" rel="prev" title="Discovering a Blind XXE in an ICS Web App"><i class="iconfont icon-dajiantou"></i>&nbsp;Discovering a Blind XXE in an ICS Web App</a>
+        
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="footer-social"> Get in touch: 
+<a href="https://github.com/momo1239" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-github"></i></a>
+
+
+<a href="https://linkedin.com/in/kenny-nguyen-2a3022152" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-linkedin"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
+    <div class="copyright" itemscope>
+        &copy;
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://momo1239.github.io/">Momo</a> | </span>
+         
+
+          <span>🛠️ with <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hugo</a> | Based on <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreferrer">KeepIt</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
+     
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>

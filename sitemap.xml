@@ -2,9 +2,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://momo1239.github.io/tags/certs/</loc>
+      
+      <lastmod>2024-10-11T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
       <loc>https://momo1239.github.io/</loc>
       
-      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
+      <lastmod>2024-10-11T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/mobile-app/</loc>
+      
+      <lastmod>2024-10-11T00:00:00+00:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -18,7 +46,315 @@
     <url>
       <loc>https://momo1239.github.io/posts/</loc>
       
-      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
+      <lastmod>2024-10-11T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/review/</loc>
+      
+      <lastmod>2024-10-11T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2024/mobile-cert/</loc>
+      
+      <lastmod>2024-10-11T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/</loc>
+      
+      <lastmod>2024-10-11T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/bug-bounty/</loc>
+      
+      <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2024/xxe_writeup/</loc>
+      
+      <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/vuln-research/</loc>
+      
+      <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/web-hacking/</loc>
+      
+      <lastmod>2024-06-03T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/buffer-overflow/</loc>
+      
+      <lastmod>2024-05-19T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2024/cve-2024/</loc>
+      
+      <lastmod>2024-05-19T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/memory-corruption/</loc>
+      
+      <lastmod>2024-05-19T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/binary-exploitation/</loc>
+      
+      <lastmod>2024-05-17T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2024/pwnctf/</loc>
+      
+      <lastmod>2024-05-17T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/ctf/</loc>
+      
+      <lastmod>2024-05-17T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/rop/</loc>
+      
+      <lastmod>2024-05-17T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/exploit-dev/</loc>
+      
+      <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/sans/</loc>
+      
+      <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2024/sans_ctf_writeup/</loc>
+      
+      <lastmod>2024-02-27T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2023/re3-writeup/</loc>
+      
+      <lastmod>2023-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/reversing/</loc>
+      
+      <lastmod>2023-12-21T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/2023/cve-2023-24203/</loc>
+      
+      <lastmod>2023-02-04T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/sqli/</loc>
+      
+      <lastmod>2023-02-04T00:00:00+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://momo1239.github.io/tags/xss/</loc>
+      
+      <lastmod>2023-02-04T00:00:00+00:00</lastmod>
       
       
       <changefreq>monthly</changefreq>
@@ -59,20 +395,6 @@
   
     <url>
       <loc>https://momo1239.github.io/2021/dll/</loc>
-      
-      <lastmod>2021-12-19T00:00:00+00:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0.5</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://momo1239.github.io/tags/</loc>
       
       <lastmod>2021-12-19T00:00:00+00:00</lastmod>
       
@@ -129,20 +451,6 @@
   
     <url>
       <loc>https://momo1239.github.io/2021/crto-review/</loc>
-      
-      <lastmod>2021-11-17T00:00:00+00:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0.5</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>https://momo1239.github.io/tags/review/</loc>
       
       <lastmod>2021-11-17T00:00:00+00:00</lastmod>
       
