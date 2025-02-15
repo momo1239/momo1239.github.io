@@ -5,13 +5,13 @@
     <description>Recent content in Kenny Nguyen (momo) on Kenny Nguyen (momo)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 19 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 11 Oct 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://momo1239.github.io/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Posts</title>
       <link>https://momo1239.github.io/posts/</link>
-      <pubDate>Sun, 19 Dec 2021 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
       
       <guid>https://momo1239.github.io/posts/</guid>
       <description></description>
@@ -27,9 +27,8 @@
 &lt;p&gt;Lenard. Offensive security research.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Adverserial Emulation / Red Teaming&lt;/li&gt;
-&lt;li&gt;Malware Dev&lt;/li&gt;
+&lt;li&gt;IoT Security&lt;/li&gt;
 &lt;li&gt;Vulnerability Research&lt;/li&gt;
-&lt;li&gt;Cryptography&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/in/kenny-nguyen-2a3022152/&#34;&gt;Linkedin&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/momo1239&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
@@ -40,8 +39,8 @@
 &lt;li&gt;Offensive Security Certified Professional (OSCP)&lt;/li&gt;
 &lt;li&gt;eLearnSecurity Certified Penetration Tester eXtreme v2 (eCPTXv2)&lt;/li&gt;
 &lt;li&gt;Certified Red Team Operator (CRTO)&lt;/li&gt;
-&lt;li&gt;Certified Ethical Hacker (CEH)&lt;/li&gt;
-&lt;li&gt;CompTIA Security+&lt;/li&gt;
+&lt;li&gt;Certified UnEthical Hacker (CUEH)&lt;/li&gt;
+&lt;li&gt;CompTIA SecNetCloudLinAProj+&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

