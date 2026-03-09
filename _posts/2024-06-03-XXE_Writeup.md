@@ -56,6 +56,6 @@ Now, to trigger the vulnerability I will send in a POST request with the followi
 
 In the first part, when we send this payload, the xml parser will process the payload to hit our dtd file. Then the xml parser will process the external dtd file that I created which will instruct it to fetch C:\windows\win.ini and send it back to my web server. The end result will have the file contents of the file encoded in our web server's log and we can easily decode to read the file contents.
 
-![File Contents Retrieved](/images/xxe_results.png)
+![File Contents Retrieved](/assets/img/xxe/xxe_results.png)
 
 Thank you for reading this short writeup on discovering a Blind XXE on a public web application. I have reported this vulnerability to the proper authorities and they have now implemented security measures against this attack!
