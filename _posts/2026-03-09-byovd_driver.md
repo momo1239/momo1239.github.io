@@ -106,7 +106,7 @@ __int64 __fastcall KillProcessByPID(unsigned int pid)
 
 ### Input Buffer Layout
 
-The IOCTL expects exactly **1036 bytes**:
+The IOCTL expects exactly **1036 bytes** with the PID in the first 4 bytes:
 
 ```c
 #pragma pack(push, 1)
@@ -118,7 +118,6 @@ typedef struct {
 #pragma pack(pop)
 ```
 
-There is **zero validation** on the PID field. Any value goes straight to `ZwOpenProcess`.
 
 ---
 
@@ -128,7 +127,7 @@ The PoC was created to demo against Windows Defender but this can be applied to 
 
 ![Windows Defender Process](/assets/img/driver/msmp.png)
 ![Disabling Defender 1](/assets/img/driver/msmpsave.png)
-![Disabling Defender 2](/assets/img/driver/msmpsave.png)
+![Disabling Defender 2](/assets/img/driver/msmpsave2.png)
 
 
 ---
