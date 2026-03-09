@@ -57,7 +57,7 @@ When you sign up for the course you will get access to the course materials on a
 -   Post-Engagement & Reporting
 -   Extending Cobalt Strike
 
-Each of these modules have sub-modules and some with videos accompanying the materials as well. The materials does a good job of explaining the concepts and also showing you how it's done in cobalt strike. But if you want more detailed information on how an attack works I recommend <https://adsecurity.org> and [harmj0y's blog](http://harmj0y.net/blog/blog)
+Each of these modules have sub-modules and some with videos accompanying the materials as well. The materials does a good job of explaining the concepts and also showing you how it's done in cobalt strike. But if you want more detailed information on how an attack works I recommend <https://adsecurity.org> and [harmj0y's blog](https://blog.harmj0y.net/blog/)
 
 The course does provide everything you need to pass the exam and external sources and absolutely not needed. But in order to learn how to implement and apply the knowledge from the course materials, it's important to practice in the labs because the execution and implementation will be different depending on the configuration of the network.
 
