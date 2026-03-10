@@ -62,8 +62,8 @@ kerberos::golden /user:Administrator /domain:<currentdomain> /sid:<CurrentDomain
 ```
 After creating the ticket, we can pass the ticket and access resources in the root domain as the enterprise admin. We can also perform a dcsync attack.
 
-![Golden Ticket](/assets/img/golder.png)
-![PTT from child domain](/assets/img/ptt.png)
+![Golden Ticket](/assets/img/golder.PNG)
+![PTT from child domain](/assets/img/ptt.PNG)
 
 
 
@@ -142,16 +142,16 @@ This means that if we have a two-way forest trust between Forest-A and Forest-B,
 ## Demo
 
  - Using Rubeus' monitor:
- ![rubeus monitor](/assets/img/monitor.png)
+ ![rubeus monitor](/assets/img/monitor.PNG)
 
 - Triggering the printer bug with SpoolSample:
-![spoolsample](/assets/img/spool.png)
+![spoolsample](/assets/img/spool.PNG)
 
 - Receive TGT
-![TGT of DC](/assets/img/tgt.png)
+![TGT of DC](/assets/img/tgt.PNG)
 
 - PTT
-![PTT](/assets/img/ptt.png)
+![PTT](/assets/img/ptt.PNG)
 
 # Manual Trust Abuse
 Prior to the days of easily abusing intra-forest trusts via SID History abuse, attackers had to enumerate and map out foreign user/group membership and escalate from child trust to root domain by hand. 
